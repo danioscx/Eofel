@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">eofel</string>
+    <string name="title">Title</string>
+    <string name="excerpt">Flask adalah sebuah web app framework. Apa itu Framework? Framework adalah sebuah kode library yang berisi tools dan lainnya yang mana framework dapat membuat pekerjaan developer menjadi lebih mudah, yaitu memberikan kode atau ekstensi yang dapat digunakan kembali untuk operasi umum. Ada beberapa framework di python, termasuk Flask, Django, Tornado dan Pyramid.</string>
+    <string name="related_post">Related post</string>
+    <string name="date">12 decmber</string>
+    <string name="comments">Comments</string>
+    <string name="home">Home</string>
+    <string name="user">Person</string>
+    <string name="library">Library</string>
+</resources>
