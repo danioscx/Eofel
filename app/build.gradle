@@ -43,10 +43,15 @@ dependencies {
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation 'org.jetbrains:annotations:15.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
     //SearchView
     implementation 'com.github.Ferfalk:SimpleSearchView:0.1.6'
+
+
+    //Ad
+    implementation 'com.google.android.gms:play-services-ads:19.7.0'
 
 
     testImplementation 'junit:junit:4.13.1'

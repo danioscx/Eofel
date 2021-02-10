@@ -1,6 +1,7 @@
 package com.eofelx.eofel.views.home;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -10,6 +11,11 @@ import android.view.ViewGroup;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,6 +40,19 @@ import com.eofelx.eofel.models.Posts;
 import com.eofelx.eofel.utils.Query;
 import com.eofelx.eofel.views.BaseViews;
 import com.eofelx.eofel.views.HomeViews;
+import com.google.android.gms.ads.AdLoader;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MediaContent;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.VideoController;
+import com.google.android.gms.ads.VideoOptions;
+import com.google.android.gms.ads.formats.MediaView;
+import com.google.android.gms.ads.formats.NativeAdOptions;
+import com.google.android.gms.ads.formats.UnifiedNativeAd;
+import com.google.android.gms.ads.formats.UnifiedNativeAdView;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,9 +60,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class PostViews extends BaseViews implements BaseViews.OnBackPress {
+
 
     TextView title;
     WebView contents;
@@ -54,6 +75,8 @@ public class PostViews extends BaseViews implements BaseViews.OnBackPress {
     LinearLayoutManager manager;
 
     RequestQueue queue;
+
+   AdView adView;
 
     @Nullable
     @Override
@@ -67,6 +90,28 @@ public class PostViews extends BaseViews implements BaseViews.OnBackPress {
         super.onViewCreated(view, savedInstanceState);
         AppCompatActivity activity = (AppCompatActivity) requireActivity();// getActivity();
         Objects.requireNonNull(activity.getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        //Initial ads
+
+
+       /* refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View unusedView) {
+                refreshAd();
+            }
+        });*/
+
+
+        adView = view.findViewById(R.id.ad_view);
+
+        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         title = view.findViewById(R.id.title_post);
         contents = view.findViewById(R.id.content_html);
@@ -87,14 +132,13 @@ public class PostViews extends BaseViews implements BaseViews.OnBackPress {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
                     if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                        switch (keyCode) {
-                            case KeyEvent.KEYCODE_BACK:
-                                if (contents.canGoBack()) {
-                                    contents.goBack();
-                                } else {
-                                    requireActivity().getSupportFragmentManager().popBackStack();
-                                }
-                                return true;
+                        if (keyCode == KeyEvent.KEYCODE_BACK) {
+                            if (contents.canGoBack()) {
+                                contents.goBack();
+                            } else {
+                                requireActivity().getSupportFragmentManager().popBackStack();
+                            }
+                            return true;
                         }
                     }
                     return false;
@@ -106,6 +150,7 @@ public class PostViews extends BaseViews implements BaseViews.OnBackPress {
             addComments();
         }
     }
+
 
     private void addComments() {
         List<Comments> comments = new ArrayList<>();
