@@ -29,7 +29,8 @@
         </activity>
         <activity
             android:name=".activities.RootActivity"
-            android:hardwareAccelerated="true"/>
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
     </application>
 
 </manifest>

@@ -7,20 +7,24 @@ public class Comments {
     private String authorUrl;
     private String date;
     private String content;
+    private String parent;
     private String avatar;
+    private String post;
 
     //default constructor
     public Comments() {
 
     }
 
-    public Comments(String id, String authorName, String authorUrl, String date, String content, String avatar) {
+    public Comments(String id, String authorName, String authorUrl, String date, String content, String parent, String avatar, String post) {
         this.id = id;
         this.authorName = authorName;
         this.authorUrl = authorUrl;
         this.date = date;
         this.content = content;
+        this.parent = parent;
         this.avatar = avatar;
+        this.post = post;
     }
 
     public String getId() {
@@ -63,11 +67,27 @@ public class Comments {
         this.content = content;
     }
 
+    public String getParent() {
+        return parent;
+    }
+
+    public void setParent(String parent) {
+        this.parent = parent;
+    }
+
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 
     public String getAvatar() {
         return avatar;
+    }
+
+    public void setPost(String post) {
+        this.post = post;
+    }
+
+    public String getPost() {
+        return post;
     }
 }

@@ -8,6 +8,14 @@ public class Query {
 
     private final String MAIN_URL = "https://eofel33.000webhostapp.com/wp-json/wp/v2/";
 
+    private String postId;
+    private String author;
+    private String authorName;
+    private String authorEmail;
+    private String content;
+    private String parent;
+
+
 
     public Query() {
     }
@@ -60,5 +68,69 @@ public class Query {
         return MAIN_URL + POSTS + SEARCH + query;
     }
 
+    public String putComments() {
+        String Comments = "comments";
+        return MAIN_URL + Comments;
+    }
 
+    public static class Comments {
+
+        private String postId;
+        private String author;
+        private String authorName;
+        private String authorEmail;
+        private String content;
+        private String parent;
+
+        public Comments postId(String id) {
+            this.postId = id;
+            return this;
+        }
+
+        public Comments author(String author) {
+            this.author = author;
+            return this;
+        }
+
+        public Comments authorName(String authorName) {
+            this.authorName = authorName;
+            return this;
+        }
+
+        public Comments authorEmail(String authorEmail) {
+            this.authorEmail = authorEmail;
+            return this;
+        }
+
+        public Comments content(String content) {
+            this.content = content;
+            return this;
+        }
+
+        public Comments parent(String parent) {
+            this.parent = parent;
+            return this;
+        }
+
+        public Query build() {
+            Query query = new Query();
+            query.postId = this.postId;
+            query.author = this.author;
+            query.authorName = this.authorName;
+            query.authorEmail = this.authorEmail;
+            query.content = this.content;
+            query.parent = parent;
+            return query;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return MAIN_URL  + "comments?" +
+                "author_name=" + authorName +
+                "&author_email=" + authorEmail +
+                "&content=" + content +
+                "&parent=" + parent +
+                "&post=" + postId ;
+    }
 }

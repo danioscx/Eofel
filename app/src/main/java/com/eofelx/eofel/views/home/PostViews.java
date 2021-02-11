@@ -13,8 +13,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -53,6 +55,7 @@ import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.android.gms.ads.formats.UnifiedNativeAdView;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -71,6 +74,7 @@ public class PostViews extends BaseViews implements BaseViews.OnBackPress {
 
     RecyclerView recyclerViewCategory;
     RecyclerView recyclerViewReplies;
+    EditText editText;
 
     LinearLayoutManager manager;
 
@@ -91,6 +95,7 @@ public class PostViews extends BaseViews implements BaseViews.OnBackPress {
         AppCompatActivity activity = (AppCompatActivity) requireActivity();// getActivity();
         Objects.requireNonNull(activity.getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
+        editText = view.findViewById(R.id.reply);
         //Initial ads
 
 
@@ -154,7 +159,7 @@ public class PostViews extends BaseViews implements BaseViews.OnBackPress {
 
     private void addComments() {
         List<Comments> comments = new ArrayList<>();
-        String repliesUrl = getArguments().getString("replies");
+        String repliesUrl = getArguments().getString("replies") + "&order=asc";
         System.out.println(repliesUrl);
         JsonArrayRequest arrayRequest = new JsonArrayRequest(Request.Method.GET,
                 repliesUrl, null, new Response.Listener<JSONArray>() {
@@ -178,19 +183,18 @@ public class PostViews extends BaseViews implements BaseViews.OnBackPress {
                             for (int j = 0; j < avatar.length(); j++) {
                                 comment.setAvatar(avatar.getString("96"));
                             }
-                            String array = object.getString("parent");
+                            comment.setParent(object.getString("parent"));
+                            comment.setPost(object.getString("post"));
 
-                            if (array.equals("0"))
-                                System.out.println("null");
-                            else
-                                System.out.println(array);
                             comments.add(new Comments(
                                     comment.getId(),
                                     comment.getAuthorName(),
                                     comment.getAuthorUrl(),
                                     comment.getDate(),
                                     comment.getContent(),
-                                    comment.getAvatar()
+                                    comment.getParent(),
+                                    comment.getAvatar(),
+                                    comment.getPost()
                             ));
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -214,6 +218,7 @@ public class PostViews extends BaseViews implements BaseViews.OnBackPress {
 
             }
         });
+        arrayRequest.setShouldCache(false);
         queue.add(arrayRequest);
     }
 
