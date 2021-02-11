@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -337,7 +338,8 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
                         }));
                         LinearLayoutManager manager = new LinearLayoutManager(getContext().getApplicationContext());
                         manager.setOrientation(RecyclerView.VERTICAL);
-                        recyclerView.setLayoutManager(manager);
+                        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+                        recyclerView.setLayoutManager(layoutManager);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
