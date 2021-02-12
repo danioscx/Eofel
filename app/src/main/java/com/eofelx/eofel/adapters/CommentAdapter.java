@@ -23,6 +23,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.eofelx.eofel.R;
+import com.eofelx.eofel.activities.RootActivity;
 import com.eofelx.eofel.models.Comments;
 import com.eofelx.eofel.utils.Query;
 import com.eofelx.eofel.views.home.PostViews;
@@ -139,7 +140,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                             }
                             JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
                                     Query.get().putComments(), object, response -> {
-                                        AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                                        RootActivity activity = (RootActivity) view.getContext();
                                         PostViews postViews = new PostViews();
                                         activity.getSupportFragmentManager()
                                                 .beginTransaction()
