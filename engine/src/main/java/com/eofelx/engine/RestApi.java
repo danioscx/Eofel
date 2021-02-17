@@ -48,7 +48,6 @@ public class RestApi {
         private final String siteName;
         private String restApi;
         private String endPoint;
-        private String replies;
 
         public Create(String siteName) {
             this.siteName = siteName;
@@ -83,6 +82,48 @@ public class RestApi {
             return this;
         }
 
+        public Create addComments() {
+            endPoint = "/comments";
+            return this;
+        }
+
+        public Create searchOnPosts(String query) {
+            endPoint = "/posts?search=" + query;
+            return this;
+        }
+
+        /**
+         *
+         * @param queryCustom membuat custom request sendiri dengan rest api yang telah tersedia
+         * @return void
+         */
+
+        public Create query(String queryCustom) {
+            endPoint = queryCustom;
+            return this;
+        }
+
+
+        /**
+         * all router user auth
+         * @return this
+         */
+
+        public Create userGet(String email) {
+            endPoint = "/users/?search=" + email;
+            return this;
+        }
+
+        public Create userSignUp() {
+            endPoint = "/users";
+            return this;
+        }
+
+        public Create userLogIn() {
+            restApi = "/wp-json";
+            endPoint = "/jwt-auth/v1/token";
+            return this;
+        }
         @NonNull
         @Override
         public String toString() {

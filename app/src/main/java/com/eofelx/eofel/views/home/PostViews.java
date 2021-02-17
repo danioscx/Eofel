@@ -172,11 +172,11 @@ public class PostViews extends BaseViews implements BaseViews.OnBackPress {
                             }
 
                         }
-                        callback.onResult(comments);
+                        //callback.onResult(comments);
                         recyclerViewReplies.setAdapter(new CommentAdapter(comments, commentClick -> {
 
                         }, (commentField, editText) -> {
-                            RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+                            RequestQueue requestQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
                             if (editText.getText().toString().equals("")) {
                                 Toast.makeText(getContext(), "Please insert comment ", Toast.LENGTH_SHORT).show();
                             } else {

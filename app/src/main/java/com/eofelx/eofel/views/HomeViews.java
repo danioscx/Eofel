@@ -20,6 +20,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.eofelx.engine.RestApi;
+import com.eofelx.engine.models.Users;
+import com.eofelx.engine.utils.Requests;
 import com.eofelx.eofel.R;
 import com.eofelx.eofel.adapters.PostAdapter;
 import com.eofelx.eofel.models.Posts;
@@ -64,6 +67,17 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
 
         //initial ads
         getAllPost(40);
+
+        RestApi api = new RestApi(requireContext().getApplicationContext());
+        Requests requests = new Requests("https://eofel33.000webhostapp.com");
+        Users users = Users.getInstance().withUsername("stufio.act@gmail.com")
+                .withPassword("Ubuntu&1");
+        requests.userLogIn(users, new Requests.OnPutRequestResponse() {
+            @Override
+            public void onResponse(JSONObject object) {
+                System.out.println("Data From user" + object);
+            }
+        });
     }
 
     public void getAllPost(int page) {
@@ -141,6 +155,7 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
                         e.printStackTrace();
                     }
                 }, error -> Log.e("Error request: ", error.getMessage()));
+        request.setShouldCache(true);
         queue.add(request);
     }
     @Override

@@ -14,7 +14,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.eofelx.engine.RestApi;
 import com.eofelx.engine.models.Posts;
-import com.eofelx.engine.utils.RequestPost;
+import com.eofelx.engine.models.Users;
+import com.eofelx.engine.utils.Requests;
 import com.eofelx.eofel.R;
 import com.eofelx.eofel.views.HomeViews;
 import com.eofelx.eofel.views.LibraryViews;
@@ -22,6 +23,8 @@ import com.eofelx.eofel.views.PersonViews;
 import com.eofelx.eofel.views.home.SearchResultViews;
 import com.ferfalk.simplesearchview.SimpleSearchView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -31,8 +34,6 @@ public class RootActivity extends AppCompatActivity implements
 
     SimpleSearchView searchView;
 
-    RestApi api;
-    RequestPost post;
 
     BottomNavigationView bottomNavigationView;
 
@@ -48,16 +49,6 @@ public class RootActivity extends AppCompatActivity implements
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         selectViews(new HomeViews(), HomeViews.class.getSimpleName());
-
-
-        api = new RestApi(this);
-        post = new RequestPost();
-        post.getPosts(new RequestPost.OnRequestResponseModel() {
-            @Override
-            public void onResponse(List<Posts> posts) {
-                System.out.println(posts.get(0).getId());
-            }
-        });
 
     }
 

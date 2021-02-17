@@ -99,7 +99,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                        }, error -> Log.e(TAG, error.getMessage()));
+                        }, error -> System.out.println("Error"));
                 queue.add(arrayRequest);
             }
             itemView.setOnClickListener(v -> listener.onClick(posts));
