@@ -7,4 +7,14 @@
         android:title="@string/title"
         android:icon="@drawable/ic_baseline_search_24"
         app:showAsAction="ifRoom|collapseActionView"/>
+    <item
+        android:id="@+id/action_notification"
+        android:title="@string/notification"
+        android:icon="@drawable/ic_baseline_notifications_24"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_wallet"
+        android:title="@string/wallet"
+        android:icon="@drawable/ic_baseline_account_balance_wallet_24"
+        app:showAsAction="ifRoom"/>
 </menu>

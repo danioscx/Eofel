@@ -16,9 +16,9 @@
         android:theme="@style/Theme.Eofel"
         tools:targetApi="n">
 
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+<!--        <meta-data-->
+<!--            android:name="com.google.android.gms.ads.APPLICATION_ID"-->
+<!--            android:value="ca-app-pub-3940256099942544~3347511713"/>-->
 
         <activity android:name=".activities.MainActivity">
             <intent-filter>
@@ -31,6 +31,7 @@
             android:name=".activities.RootActivity"
             android:hardwareAccelerated="true"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
+        <activity android:name=".views.home.WalletViews" />
     </application>
 
 </manifest>

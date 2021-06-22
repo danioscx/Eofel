@@ -1,9 +1,12 @@
 package com.eofelx.eofel.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +20,7 @@ import com.eofelx.eofel.views.HomeViews;
 import com.eofelx.eofel.views.LibraryViews;
 import com.eofelx.eofel.views.PersonViews;
 import com.eofelx.eofel.views.home.SearchResultViews;
+import com.eofelx.eofel.views.home.WalletViews;
 import com.ferfalk.simplesearchview.SimpleSearchView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -24,6 +28,8 @@ public class RootActivity extends AppCompatActivity implements
         BottomNavigationView.OnNavigationItemSelectedListener,
         SimpleSearchView.OnQueryTextListener
 {
+
+    boolean isBackPressed = false;
 
     SimpleSearchView searchView;
 
@@ -66,6 +72,9 @@ public class RootActivity extends AppCompatActivity implements
             getSupportFragmentManager().popBackStack();
             return true;
         }
+        if (item.getItemId() == R.id.action_wallet) {
+            startActivity(new Intent(getApplicationContext(), WalletViews.class));
+        }
         return false;
     }
 
@@ -74,6 +83,10 @@ public class RootActivity extends AppCompatActivity implements
         if (item.getItemId() == R.id.home) {
             selectViews(new HomeViews(), HomeViews.class.getSimpleName());
             return true;
+        } else if (item.getItemId() == R.id.messages) {
+          //TODO
+        } else if (item.getItemId() == R.id.add_new) {
+            //TODO
         } else if (item.getItemId() == R.id.library) {
             selectViews(new LibraryViews(), LibraryViews.class.getSimpleName());
             return true;
@@ -107,5 +120,18 @@ public class RootActivity extends AppCompatActivity implements
     @Override
     public boolean onQueryTextCleared() {
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isBackPressed) {
+            super.onBackPressed();
+            return;
+        }
+        isBackPressed = true;
+
+        Toast.makeText(getApplicationContext(), "Tap once again to exit's", Toast.LENGTH_SHORT).show();
+        Handler handler = new Handler();
+        handler.postDelayed(() -> isBackPressed = false, 1000L);
     }
 }

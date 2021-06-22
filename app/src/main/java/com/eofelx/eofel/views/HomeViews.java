@@ -29,28 +29,19 @@ import com.android.volley.toolbox.Volley;
 import com.eofelx.eofel.R;
 import com.eofelx.eofel.adapters.Adapter;
 import com.eofelx.eofel.adapters.PostAdapter;
+import com.eofelx.eofel.adapters.SliderHomeAdapter;
 import com.eofelx.eofel.models.Posts;
+import com.eofelx.eofel.models.SliderItem;
 import com.eofelx.eofel.utils.Query;
 import com.eofelx.eofel.views.home.PostViews;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdLoader;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.VideoController;
-import com.google.android.gms.ads.VideoOptions;
-import com.google.android.gms.ads.formats.MediaView;
-import com.google.android.gms.ads.formats.NativeAdOptions;
-import com.google.android.gms.ads.formats.UnifiedNativeAd;
-import com.google.android.gms.ads.formats.UnifiedNativeAdView;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.smarteist.autoimageslider.SliderView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -66,7 +57,7 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
 
     private Posts content;
 
-    private UnifiedNativeAd nativeAd;
+    //private UnifiedNativeAd nativeAd;
 
 
     @Nullable
@@ -85,18 +76,25 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
         linearLayout = view.findViewById(R.id.layout_loading);
         content = new Posts();
 
-        //initial ads
-        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+        SliderView sliderView = view.findViewById(R.id.slider_home);
+        int[] url = new int[] {
+          R.raw.one, R.raw.two, R.raw.three
+        };
+        List<SliderItem> items = new ArrayList<>();
+        for (int i = 0; i < url.length; i++) {
+            items.add(new SliderItem(url[i]));
+        }
+        sliderView.setSliderAdapter(new SliderHomeAdapter(items, new SliderHomeAdapter.OnItemClickListener() {
             @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {}
-        });
+            public void onClick(SliderItem item) {
 
-        refreshAd(view);
+            }
+        }));
 
         getAllPost(40);
     }
 
-    private void refreshAd(View view) {
+   /* private void refreshAd(View view) {
         AdLoader.Builder builder = new AdLoader.Builder(getContext(), ADMOB_AD_UNIT_ID);
         builder.forUnifiedNativeAd(
                 new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
@@ -159,13 +157,7 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
         adLoader.loadAd(new AdRequest.Builder().build());
     }
 
-    /**
-     * Populates a {@link UnifiedNativeAdView} object with data from a given
-     * {@link UnifiedNativeAd}.
-     *
-     * @param nativeAd the object containing the ad's assets
-     * @param adView          the view to be populated
-     */
+
     private void populateUnifiedNativeAdView(@NonNull UnifiedNativeAd nativeAd, @NonNull UnifiedNativeAdView adView) {
         // Set the media view.
         adView.setMediaView((MediaView) adView.findViewById(R.id.ad_media));
@@ -173,7 +165,7 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
         // Set other ad assets.
         adView.setHeadlineView(adView.findViewById(R.id.ad_headline));
         adView.setBodyView(adView.findViewById(R.id.ad_body));
-       /* adView.setCallToActionView(adView.findViewById(R.id.ad_call_to_action));*/
+       *//* adView.setCallToActionView(adView.findViewById(R.id.ad_call_to_action));*//*
         adView.setIconView(adView.findViewById(R.id.ad_app_icon));
         adView.setPriceView(adView.findViewById(R.id.ad_price));
         adView.setStarRatingView(adView.findViewById(R.id.ad_stars));
@@ -193,12 +185,12 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
             ((TextView) adView.getBodyView()).setText(nativeAd.getBody());
         }
 
-       /* if (nativeAd.getCallToAction() == null) {
+       *//* if (nativeAd.getCallToAction() == null) {
             adView.getCallToActionView().setVisibility(View.INVISIBLE);
         } else {
             adView.getCallToActionView().setVisibility(View.VISIBLE);
             ((Button) adView.getCallToActionView()).setText(nativeAd.getCallToAction());
-        }*/
+        }*//*
 
         if (nativeAd.getIcon() == null) {
             adView.getIconView().setVisibility(View.GONE);
@@ -246,7 +238,7 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
         VideoController vc = nativeAd.getVideoController();
 
         // Updates the UI to say whether or not this ad has a video asset.
-        /*if (vc.hasVideoContent()) {
+        *//*if (vc.hasVideoContent()) {
             videoStatus.setText(String.format(Locale.getDefault(),
                     "Video status: Ad contains a %.2f:1 video asset.",
                     vc.getAspectRatio()));
@@ -267,9 +259,9 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
         } else {
             videoStatus.setText("Video status: Ad does not contain a video asset.");
             refresh.setEnabled(true);
-        }*/
+        }*//*
     }
-
+*/
     public void getAllPost(int page) {
         List<Posts> posts = new ArrayList<>();
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
