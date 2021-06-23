@@ -13,10 +13,19 @@
     <string name="wallet">Wallet</string>
     <string name="add">Add</string>
     <string name="messages">Messages</string>
-    <string name="balance">Current Balance</string>
+    <string name="balance">Sisa Saldo</string>
     <string name="rupiah">Rp 1.000.000</string>
     <string name="mart">Mart</string>
     <string name="pos">Pos</string>
     <string name="ads">Ads</string>
     <string name="promo">Promo</string>
+    <string name="menu">Menu</string>
+    <string name="toko">Toko</string>
+    <string name="transaksi">Transaksi</string>
+    <string name="bantuan">Bantuan</string>
+    <string name="special_title">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</string>
+    <string name="spesial_dari_vazz">Spesial dari Vazz</string>
+    <string name="history">History</string>
+    <string name="penarikan">Tarik</string>
+    <string name="top_up">Top up</string>
 </resources>

@@ -81,7 +81,7 @@ public class RootActivity extends AppCompatActivity implements
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.home) {
-            selectViews(new HomeViews(), HomeViews.class.getSimpleName());
+            selectViews(HomeViews.getInstance(), HomeViews.class.getSimpleName());
             return true;
         } else if (item.getItemId() == R.id.messages) {
           //TODO

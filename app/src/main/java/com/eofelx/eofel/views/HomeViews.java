@@ -30,8 +30,11 @@ import com.eofelx.eofel.R;
 import com.eofelx.eofel.adapters.Adapter;
 import com.eofelx.eofel.adapters.PostAdapter;
 import com.eofelx.eofel.adapters.SliderHomeAdapter;
+import com.eofelx.eofel.adapters.SpecialAdapter;
+import com.eofelx.eofel.models.BaseModel;
 import com.eofelx.eofel.models.Posts;
 import com.eofelx.eofel.models.SliderItem;
+import com.eofelx.eofel.models.SpecialModel;
 import com.eofelx.eofel.utils.Query;
 import com.eofelx.eofel.views.home.PostViews;
 import com.smarteist.autoimageslider.SliderView;
@@ -58,12 +61,20 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
     private Posts content;
 
     //private UnifiedNativeAd nativeAd;
+    private static HomeViews views;
+
+    public static HomeViews getInstance() {
+        if (views == null) {
+            views = new HomeViews();
+        }
+        return views;
+    }
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.view_home, container, false);
+        return inflater.inflate(R.layout.view_home_design, container, false);
     }
 
     @Override
@@ -72,26 +83,41 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
         AppCompatActivity activity = (AppCompatActivity) requireActivity();// getActivity();
         Objects.requireNonNull(activity.getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
         queue = Volley.newRequestQueue(requireContext().getApplicationContext());
-        recyclerView = view.findViewById(R.id.home_recycler_view);
+        /*recyclerView = view.findViewById(R.id.home_recycler_view);
         linearLayout = view.findViewById(R.id.layout_loading);
-        content = new Posts();
+        content = new Posts();*/
+        recyclerView = view.findViewById(R.id.design_recycler);
 
-        SliderView sliderView = view.findViewById(R.id.slider_home);
+        SliderView sliderView = view.findViewById(R.id.sliderView);
         int[] url = new int[] {
-          R.raw.one, R.raw.two, R.raw.three
+          R.raw.slider1, R.raw.slider2, R.raw.slider3, R.raw.slider4
         };
         List<SliderItem> items = new ArrayList<>();
-        for (int i = 0; i < url.length; i++) {
-            items.add(new SliderItem(url[i]));
+        for (int j : url) {
+            items.add(new SliderItem(j));
         }
         sliderView.setSliderAdapter(new SliderHomeAdapter(items, new SliderHomeAdapter.OnItemClickListener() {
             @Override
             public void onClick(SliderItem item) {
-
+            }
+        }));
+        int[] urls = new int[] {
+                R.raw.slider1, R.raw.slider2, R.raw.slider3, R.raw.slider4,
+                R.raw.one, R.raw.two, R.raw.three
+        };
+        List<SpecialModel> models = new ArrayList<>();
+        for (int i : urls) {
+            models.add(new SpecialModel(i, getResources().getString(R.string.special_title)));
+        }
+        LinearLayoutManager manager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(new SpecialAdapter(models, new Adapter.OnClickListener() {
+            @Override
+            public <T extends BaseModel> void onClick(T click) {
             }
         }));
 
-        getAllPost(40);
+       // getAllPost(40);
     }
 
    /* private void refreshAd(View view) {
@@ -262,7 +288,7 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
         }*//*
     }
 */
-    public void getAllPost(int page) {
+   /* public void getAllPost(int page) {
         List<Posts> posts = new ArrayList<>();
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET,
                 Query.get().getAllPosts(page), null, response -> {
@@ -335,7 +361,7 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
                     }
                 }, error -> Log.e("Error request: ", error.getMessage()));
         queue.add(request);
-    }
+    }*/
     @Override
     public void backPress() {
         requireActivity().getSupportFragmentManager().popBackStack();
