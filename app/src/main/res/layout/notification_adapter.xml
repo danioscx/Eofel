@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_gravity="top|start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bantuan"
+        style="@style/TextAppearance.AppCompat.Headline"
+        android:id="@+id/notif_adapter_title"/>
+
+    <TextView
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|bottom"
+        android:text="@string/history"
+        android:id="@+id/notif_adapter_desc"/>
+
+    <TextView
+        android:text="@string/masukan_jumlah"
+        android:layout_gravity="end|bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/notif_adapter_date"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

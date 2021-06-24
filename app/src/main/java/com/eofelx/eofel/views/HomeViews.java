@@ -1,6 +1,7 @@
 package com.eofelx.eofel.views;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +28,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.eofelx.eofel.R;
+import com.eofelx.eofel.activities.MartActivity;
 import com.eofelx.eofel.adapters.Adapter;
 import com.eofelx.eofel.adapters.PostAdapter;
 import com.eofelx.eofel.adapters.SliderHomeAdapter;
@@ -56,7 +58,7 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
 
 
     RecyclerView recyclerView;
-    LinearLayout linearLayout;
+    LinearLayout mart, ads, promo, pos;
 
     private Posts content;
 
@@ -101,6 +103,8 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
             public void onClick(SliderItem item) {
             }
         }));
+        sliderView.setAutoCycle(true);
+        sliderView.startAutoCycle();
         int[] urls = new int[] {
                 R.raw.slider1, R.raw.slider2, R.raw.slider3, R.raw.slider4,
                 R.raw.one, R.raw.two, R.raw.three
@@ -118,80 +122,91 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
         }));
 
        // getAllPost(40);
+
+        mart = view.findViewById(R.id.home_mart);
+        ads = view.findViewById(R.id.home_ads);
+        promo = view.findViewById(R.id.home_promo);
+        pos = view.findViewById(R.id.home_pos);
+
+        generateClick();
     }
 
-   /* private void refreshAd(View view) {
-        AdLoader.Builder builder = new AdLoader.Builder(getContext(), ADMOB_AD_UNIT_ID);
-        builder.forUnifiedNativeAd(
-                new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
-                    // OnUnifiedNativeAdLoadedListener implementation.
-                    @Override
-                    public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
-                        // If this callback occurs after the activity is destroyed, you must call
-                        // destroy and return or you may get a memory leak.
-                        boolean isDestroyed;
-                        isDestroyed = getActivity().isDestroyed();
-                        if (isDestroyed || getActivity().isFinishing() || getActivity().isChangingConfigurations()) {
-                            unifiedNativeAd.destroy();
-                            return;
-                        }
-                        // You must call destroy on old ads when you are done with them,
-                        // otherwise you will have a memory leak.
-                        if (nativeAd != null) {
-                            nativeAd.destroy();
-                        }
-                        nativeAd = unifiedNativeAd;
-                        FrameLayout frameLayout = view.findViewById(R.id.fl_adplaceholder);
-                        UnifiedNativeAdView adView =
-                                (UnifiedNativeAdView) getLayoutInflater()
-                                        .inflate(R.layout.ad_native, null);
-                        populateUnifiedNativeAdView(unifiedNativeAd, adView);
-                        frameLayout.removeAllViews();
-                        frameLayout.addView(adView);
-                    }
-                });
-
-        VideoOptions videoOptions =
-                new VideoOptions.Builder().setStartMuted(false).build();
-
-        NativeAdOptions adOptions =
-                new NativeAdOptions.Builder().setVideoOptions(videoOptions).build();
-
-        builder.withNativeAdOptions(adOptions);
-
-        AdLoader adLoader =
-                builder
-                        .withAdListener(
-                                new AdListener() {
-                                    @Override
-                                    public void onAdFailedToLoad(LoadAdError loadAdError) {
-                                        @SuppressLint("DefaultLocale") String error =
-                                                String.format(
-                                                        "domain: %s, code: %d, message: %s",
-                                                        loadAdError.getDomain(),
-                                                        loadAdError.getCode(),
-                                                        loadAdError.getMessage());
-                                        Toast.makeText(
-                                                requireActivity(),
-                                                "Failed to load native ad with error " + error,
-                                                Toast.LENGTH_SHORT)
-                                                .show();
-                                    }
-                                })
-                        .build();
-
-        adLoader.loadAd(new AdRequest.Builder().build());
+    private void generateClick() {
+        mart.setOnClickListener(v -> startActivity(new Intent(requireActivity(), MartActivity.class)));
     }
 
+    /* private void refreshAd(View view) {
+         AdLoader.Builder builder = new AdLoader.Builder(getContext(), ADMOB_AD_UNIT_ID);
+         builder.forUnifiedNativeAd(
+                 new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
+                     // OnUnifiedNativeAdLoadedListener implementation.
+                     @Override
+                     public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
+                         // If this callback occurs after the activity is destroyed, you must call
+                         // destroy and return or you may get a memory leak.
+                         boolean isDestroyed;
+                         isDestroyed = getActivity().isDestroyed();
+                         if (isDestroyed || getActivity().isFinishing() || getActivity().isChangingConfigurations()) {
+                             unifiedNativeAd.destroy();
+                             return;
+                         }
+                         // You must call destroy on old ads when you are done with them,
+                         // otherwise you will have a memory leak.
+                         if (nativeAd != null) {
+                             nativeAd.destroy();
+                         }
+                         nativeAd = unifiedNativeAd;
+                         FrameLayout frameLayout = view.findViewById(R.id.fl_adplaceholder);
+                         UnifiedNativeAdView adView =
+                                 (UnifiedNativeAdView) getLayoutInflater()
+                                         .inflate(R.layout.ad_native, null);
+                         populateUnifiedNativeAdView(unifiedNativeAd, adView);
+                         frameLayout.removeAllViews();
+                         frameLayout.addView(adView);
+                     }
+                 });
 
-    private void populateUnifiedNativeAdView(@NonNull UnifiedNativeAd nativeAd, @NonNull UnifiedNativeAdView adView) {
-        // Set the media view.
-        adView.setMediaView((MediaView) adView.findViewById(R.id.ad_media));
+         VideoOptions videoOptions =
+                 new VideoOptions.Builder().setStartMuted(false).build();
 
-        // Set other ad assets.
-        adView.setHeadlineView(adView.findViewById(R.id.ad_headline));
-        adView.setBodyView(adView.findViewById(R.id.ad_body));
-       *//* adView.setCallToActionView(adView.findViewById(R.id.ad_call_to_action));*//*
+         NativeAdOptions adOptions =
+                 new NativeAdOptions.Builder().setVideoOptions(videoOptions).build();
+
+         builder.withNativeAdOptions(adOptions);
+
+         AdLoader adLoader =
+                 builder
+                         .withAdListener(
+                                 new AdListener() {
+                                     @Override
+                                     public void onAdFailedToLoad(LoadAdError loadAdError) {
+                                         @SuppressLint("DefaultLocale") String error =
+                                                 String.format(
+                                                         "domain: %s, code: %d, message: %s",
+                                                         loadAdError.getDomain(),
+                                                         loadAdError.getCode(),
+                                                         loadAdError.getMessage());
+                                         Toast.makeText(
+                                                 requireActivity(),
+                                                 "Failed to load native ad with error " + error,
+                                                 Toast.LENGTH_SHORT)
+                                                 .show();
+                                     }
+                                 })
+                         .build();
+
+         adLoader.loadAd(new AdRequest.Builder().build());
+     }
+
+
+     private void populateUnifiedNativeAdView(@NonNull UnifiedNativeAd nativeAd, @NonNull UnifiedNativeAdView adView) {
+         // Set the media view.
+         adView.setMediaView((MediaView) adView.findViewById(R.id.ad_media));
+
+         // Set other ad assets.
+         adView.setHeadlineView(adView.findViewById(R.id.ad_headline));
+         adView.setBodyView(adView.findViewById(R.id.ad_body));
+        *//* adView.setCallToActionView(adView.findViewById(R.id.ad_call_to_action));*//*
         adView.setIconView(adView.findViewById(R.id.ad_app_icon));
         adView.setPriceView(adView.findViewById(R.id.ad_price));
         adView.setStarRatingView(adView.findViewById(R.id.ad_stars));

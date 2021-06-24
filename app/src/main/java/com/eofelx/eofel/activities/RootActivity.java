@@ -20,7 +20,7 @@ import com.eofelx.eofel.views.HomeViews;
 import com.eofelx.eofel.views.LibraryViews;
 import com.eofelx.eofel.views.PersonViews;
 import com.eofelx.eofel.views.home.SearchResultViews;
-import com.eofelx.eofel.views.home.WalletViews;
+import com.eofelx.eofel.views.home.WalletActivity;
 import com.ferfalk.simplesearchview.SimpleSearchView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -73,7 +73,9 @@ public class RootActivity extends AppCompatActivity implements
             return true;
         }
         if (item.getItemId() == R.id.action_wallet) {
-            startActivity(new Intent(getApplicationContext(), WalletViews.class));
+            startActivity(new Intent(getApplicationContext(), WalletActivity.class));
+        } else if (item.getItemId() == R.id.action_notification) {
+            startActivity(new Intent(getApplicationContext(), NotificationActivity.class));
         }
         return false;
     }

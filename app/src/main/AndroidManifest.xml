@@ -3,23 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.eofelx.eofel">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:hardwareAccelerated="true"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/security"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:networkSecurityConfig="@xml/security"
         android:theme="@style/Theme.Eofel"
         tools:targetApi="n">
-
-<!--        <meta-data-->
-<!--            android:name="com.google.android.gms.ads.APPLICATION_ID"-->
-<!--            android:value="ca-app-pub-3940256099942544~3347511713"/>-->
-
+        <activity android:name=".activities.NotificationActivity"></activity>
+        <activity android:name=".activities.MartActivity" /> <!-- <meta-data -->
+        <!-- android:name="com.google.android.gms.ads.APPLICATION_ID" -->
+        <!-- android:value="ca-app-pub-3940256099942544~3347511713"/> -->
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,8 +29,10 @@
         <activity
             android:name=".activities.RootActivity"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"/>
-        <activity android:name=".views.home.WalletViews" />
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity android:name=".views.home.WalletActivity" />
+        <activity android:name=".views.home.wallet.InsetActivity" />
+        <activity android:name=".views.home.wallet.WithDrawActivity" />
     </application>
 
 </manifest>

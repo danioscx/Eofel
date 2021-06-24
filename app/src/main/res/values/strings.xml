@@ -28,4 +28,9 @@
     <string name="history">History</string>
     <string name="penarikan">Tarik</string>
     <string name="top_up">Top up</string>
+    <string name="success">success</string>
+    <string name="buat_iklan">Buat iklan</string>
+    <string name="rp">Rp</string>
+    <string name="masukan_jumlah">Masukan jumlah</string>
+    <string name="jumlah_penarikan">Jumlah minimal penarikah adalah Rp 10.000</string>
 </resources>
