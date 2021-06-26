@@ -13,6 +13,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:title="@string/notification"
             android:id="@+id/toolbar"/>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -21,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
 
     </androidx.core.widget.NestedScrollView>
 

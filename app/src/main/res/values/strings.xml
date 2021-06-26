@@ -33,4 +33,15 @@
     <string name="rp">Rp</string>
     <string name="masukan_jumlah">Masukan jumlah</string>
     <string name="jumlah_penarikan">Jumlah minimal penarikah adalah Rp 10.000</string>
+    <string name="nama_lengkap">Nama lengkap</string>
+    <string name="alamat_lengkap">Alamat lengkap</string>
+    <string name="nomor_telepon">Nomor telepon</string>
+    <string name="email">Email</string>
+    <string name="lanjutkan">Lanjutkan</string>
+    <string name="registrasi">Registrasi</string>
+    <string name="kota">Kota</string>
+    <string name="password">Password</string>
+    <string name="ulangi_password">Ulangi password</string>
+    <string name="ktp">Nama pemilik usaha</string>
+    <string name="error_name">Nama tidak boleh kurang dari 3 huruf</string>
 </resources>

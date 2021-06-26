@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.eofelx.eofel.R;
 import com.eofelx.eofel.views.HomeViews;
 import com.eofelx.eofel.views.LibraryViews;
+import com.eofelx.eofel.views.MessageView;
 import com.eofelx.eofel.views.PersonViews;
 import com.eofelx.eofel.views.home.SearchResultViews;
 import com.eofelx.eofel.views.home.WalletActivity;
@@ -86,6 +87,8 @@ public class RootActivity extends AppCompatActivity implements
             selectViews(HomeViews.getInstance(), HomeViews.class.getSimpleName());
             return true;
         } else if (item.getItemId() == R.id.messages) {
+            selectViews(new MessageView(), MessageView.class.getSimpleName());
+            return true;
           //TODO
         } else if (item.getItemId() == R.id.add_new) {
             //TODO
