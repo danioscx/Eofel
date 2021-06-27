@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.eofelx.eofel.R;
 import com.eofelx.eofel.activities.SignUpActivity;
+import com.eofelx.eofel.activities.WelcomeActivity;
 
 public class PersonViews extends BaseViews {
 
@@ -28,7 +29,7 @@ public class PersonViews extends BaseViews {
         LinearLayout layout = view.findViewById(R.id.login_or_detail);
         layout.setOnClickListener(v -> {
             //TODO session
-            startActivity(new Intent(requireContext(), SignUpActivity.class));
+            startActivity(new Intent(requireContext(), WelcomeActivity.class));
         });
     }
 }

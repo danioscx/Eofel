@@ -12,15 +12,18 @@ import android.widget.Button;
 
 import com.eofelx.eofel.R;
 import com.eofelx.eofel.activities.signup.SignUp;
+import com.eofelx.eofel.adapters.SliderHomeAdapter;
+import com.eofelx.eofel.models.SliderItem;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.smarteist.autoimageslider.SliderView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SignUpActivity extends AppCompatActivity {
 
 
-    Button button;
-    TextInputEditText name, email;
-    TextInputLayout names, emails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +31,18 @@ public class SignUpActivity extends AppCompatActivity {
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
+        SliderView sliderView = findViewById(R.id.sign_slider);
+        int[] url = new int[] {
+                R.raw.slider1, R.raw.slider2, R.raw.slider3, R.raw.slider4
+        };
+        List<SliderItem> items = new ArrayList<>();
+        for (int j : url) {
+            items.add(new SliderItem(j));
+        }
+        sliderView.setSliderAdapter(new SliderHomeAdapter(items, item -> {
+        }));
+
+        sliderView.startAutoCycle();
         nextFragment(new SignUp());
     }
 
@@ -36,7 +51,6 @@ public class SignUpActivity extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.next_register, fragment)
-                .addToBackStack(null)
                 .commit();
     }
 

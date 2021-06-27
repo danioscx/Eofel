@@ -5,25 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/info_dasar"
+        style="@style/TextAppearance.AppCompat.Headline"/>
+
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/kota_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:hint="@string/kota">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/kota"
             android:layout_width="match_parent"
             android:inputType="text"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_kecamatan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:hint="@string/alamat_lengkap">
+        android:hint="@string/kecamatan">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/kecamatan"
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>

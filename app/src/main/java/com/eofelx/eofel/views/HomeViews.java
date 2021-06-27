@@ -103,7 +103,6 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
             public void onClick(SliderItem item) {
             }
         }));
-        sliderView.setAutoCycle(true);
         sliderView.startAutoCycle();
         int[] urls = new int[] {
                 R.raw.slider1, R.raw.slider2, R.raw.slider3, R.raw.slider4,

@@ -15,8 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Eofel"
         tools:targetApi="n">
-        <activity android:name=".activities.SignUpActivity"
+        <activity android:name=".activities.WelcomeActivity"
             android:theme="@style/Theme.SignIn"/>
+        <activity
+            android:name=".activities.SignUpActivity"
+            android:theme="@style/Theme.SignIn" />
         <activity android:name=".activities.NotificationActivity" />
         <activity android:name=".activities.MartActivity" /> <!-- <meta-data -->
         <!-- android:name="com.google.android.gms.ads.APPLICATION_ID" -->

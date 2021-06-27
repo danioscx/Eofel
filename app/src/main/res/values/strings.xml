@@ -44,4 +44,10 @@
     <string name="ulangi_password">Ulangi password</string>
     <string name="ktp">Nama pemilik usaha</string>
     <string name="error_name">Nama tidak boleh kurang dari 3 huruf</string>
+    <string name="info_dasar">Info Dasar</string>
+    <string name="welcome_header">Selamat Datang di <br/><b>Vazz Merchant</b></string>
+    <string name="daftar">Belum punya akun? Daftar disini yuk!</string>
+    <string name="usaha">Pilih Jenis Usaha</string>
+    <string name="food">Food</string>
+    <string name="kecamatan">Kecamatan</string>
 </resources>

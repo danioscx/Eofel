@@ -16,7 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:title="@string/toko"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:id="@+id/mart_toolbar"/>
 
     </com.google.android.material.appbar.AppBarLayout>
