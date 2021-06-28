@@ -19,6 +19,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class SignUp extends BaseViews {
 
     Button button;
@@ -85,16 +87,21 @@ public class SignUp extends BaseViews {
 
     private void nextView() {
         button.setOnClickListener(v -> {
-            if (name.getText().length() < 3 && email.getText().length() < 3) {
+            if (Objects.requireNonNull(name.getText()).length() < 3 && Objects.requireNonNull(email.getText()).length() < 3) {
                 names.setError(getString(R.string.error_name));
                 emails.setError(getString(R.string.error_name));
             } else {
+
                 nextFragment(new SignUp1());
             }
         });
     }
 
     private void nextFragment(Fragment fragment) {
+        Bundle bundle = new Bundle();
+        bundle.putString("name", Objects.requireNonNull(name.getText()).toString());
+        bundle.putString("email", Objects.requireNonNull(email.getText()).toString());
+        fragment.setArguments(bundle);
         getParentFragmentManager()
                 .beginTransaction()
                 .replace(R.id.next_register, fragment)

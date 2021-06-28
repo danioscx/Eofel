@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,6 +38,12 @@ public class SignUp1 extends BaseViews {
         TextInputLayout layoutEditText = view.findViewById(R.id.layout_nomor_telepon);
         TextInputEditText address = view.findViewById(R.id.alamat_lengkap);
         TextInputLayout layoutAddress = view.findViewById(R.id.layout_alamat_lengkap);
+
+        assert getArguments() != null;
+        String name = getArguments().getString("name");
+        String email = getArguments().getString("email");
+
+        Toast.makeText(requireContext(), name + email, Toast.LENGTH_SHORT).show();
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override

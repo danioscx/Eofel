@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/terbaru"
+        android:title="@string/terbaru"/>
+
+    <item
+        android:id="@+id/terlaris"
+        android:title="@string/terlaris"/>
+
+    <item
+        android:id="@+id/terlama"
+        android:title="@string/terlama"/>
+
+
+</menu>

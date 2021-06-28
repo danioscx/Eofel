@@ -1,52 +1,32 @@
 package com.eofelx.eofel.views;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.eofelx.eofel.R;
-import com.eofelx.eofel.activities.MartActivity;
+import com.eofelx.eofel.views.home.MartActivity;
 import com.eofelx.eofel.adapters.Adapter;
-import com.eofelx.eofel.adapters.PostAdapter;
 import com.eofelx.eofel.adapters.SliderHomeAdapter;
 import com.eofelx.eofel.adapters.SpecialAdapter;
 import com.eofelx.eofel.models.BaseModel;
 import com.eofelx.eofel.models.Posts;
 import com.eofelx.eofel.models.SliderItem;
 import com.eofelx.eofel.models.SpecialModel;
-import com.eofelx.eofel.utils.Query;
-import com.eofelx.eofel.views.home.PostViews;
 import com.smarteist.autoimageslider.SliderView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 

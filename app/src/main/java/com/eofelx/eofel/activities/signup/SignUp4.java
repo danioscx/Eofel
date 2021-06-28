@@ -45,13 +45,14 @@ public class SignUp4 extends BaseViews implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        int selected;
         if (v == button) {
             if (!food.isSelected() && !mart.isSelected()) {
                 Toast.makeText(requireContext(), "Pilih salah satu!", Toast.LENGTH_SHORT).show();
             }
-            boolean selected = food.isSelected() == mart.isSelected();
         }
         if (v == food) {
+            selected = 0;
             food.setSelected(true);
             mart.setSelected(false);
             food.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.ic_rectangle_18));
@@ -60,6 +61,7 @@ public class SignUp4 extends BaseViews implements View.OnClickListener {
             mart.setTextColor(Color.BLACK);
         }
         if (v == mart) {
+            selected = 1;
             mart.setSelected(true);
             food.setSelected(false);
             mart.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.ic_rectangle_18));

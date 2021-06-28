@@ -5,18 +5,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MartActivity">
+    tools:context=".views.home.MartActivity">
 
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.appbar.MaterialToolbar
+        <FrameLayout
+            app:layout_scrollFlags="scroll|enterAlways"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="@string/toko"
-            android:id="@+id/mart_toolbar"/>
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:fitsSystemWindows="true"
+                app:title="@string/toko"
+                android:background="@color/primaryColor"
+                android:id="@+id/mart_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.ferfalk.simplesearchview.SimpleSearchView
+                android:hint="@string/cari_produk"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/mart_search_view"/>
+        </FrameLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -30,11 +44,35 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:background="#EDEDED"
+            <LinearLayout
+                android:layout_marginStart="10dp"
+                android:id="@+id/mart_shorter"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/mart_recycler"/>
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/mart_by_short"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_sort_24"
+                    android:contentDescription="@string/buat_iklan"/>
+
+                <TextView
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/urutkan"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mart_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/mart_adapter" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

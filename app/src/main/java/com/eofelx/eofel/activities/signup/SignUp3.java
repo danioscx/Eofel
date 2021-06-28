@@ -82,7 +82,7 @@ public class SignUp3 extends BaseViews {
         });
 
         button.setOnClickListener(v -> {
-            if (Objects.requireNonNull(editText.getText()).length() < 6 && !repeat.getText().toString().equals(editText.getText().toString())) {
+            if (Objects.requireNonNull(editText.getText()).length() < 6 && !Objects.requireNonNull(repeat.getText()).toString().equals(editText.getText().toString())) {
                 p_editText.setError("Password tidak boleh kurang dari 6 huruf!");
                 p_repeat.setError("Password tidak sama!");
             } else {

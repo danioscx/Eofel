@@ -45,9 +45,20 @@
     <string name="ktp">Nama pemilik usaha</string>
     <string name="error_name">Nama tidak boleh kurang dari 3 huruf</string>
     <string name="info_dasar">Info Dasar</string>
-    <string name="welcome_header">Selamat Datang di <br/><b>Vazz Merchant</b></string>
+    <string name="welcome_header">Selamat Datang di <br /><b>Vazz Merchant</b></string>
     <string name="daftar">Belum punya akun? Daftar disini yuk!</string>
     <string name="usaha">Pilih Jenis Usaha</string>
     <string name="food">Food</string>
     <string name="kecamatan">Kecamatan</string>
+    <string name="menu_lainnya">Menu Lainnya</string>
+    <string name="edit">Edit</string>
+    <string name="cari_produk">Cari produk</string>
+    <string name="urutkan">Urutkan</string>
+    <string name="terlama">Terlama</string>
+    <string name="terlaris">Terlaris</string>
+    <string name="terbaru">Terbaru</string>
+    <string name="kurir">Kurir</string>
+    <string name="mitra_kurir">Mitra</string>
+    <string name="pelanggan">Pelanggan</string>
+    <string name="masukan_pesan">Masukan Pesan</string>
 </resources>

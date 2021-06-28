@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,11 +53,13 @@ public class MartAdapter extends RecyclerView.Adapter<MartAdapter.ViewHolder> {
 
         ImageView imageView;
         TextView title, price;
+        ImageView mPopup;
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.mart_adapter_image);
             title = itemView.findViewById(R.id.mart_adapter_title);
             price = itemView.findViewById(R.id.mart_adapter_price);
+            mPopup = itemView.findViewById(R.id.mart_menu);
         }
 
         void bind(MartModel model, Adapter.OnClickListener listener) {
@@ -69,7 +72,18 @@ public class MartAdapter extends RecyclerView.Adapter<MartAdapter.ViewHolder> {
             } else
                 title.setText(model.getTitle());
             price.setText(model.getPrice());
+
+            mPopup.setOnClickListener(v -> {
+                PopupMenu menu = new PopupMenu(itemView.getContext(), mPopup);
+                menu.inflate(R.menu.mart_menu);
+
+                menu.show();
+            });
+
+
+
             itemView.setOnClickListener(v -> listener.onClick(model));
+
         }
     }
 }

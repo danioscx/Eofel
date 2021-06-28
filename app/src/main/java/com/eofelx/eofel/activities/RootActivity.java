@@ -20,6 +20,7 @@ import com.eofelx.eofel.views.HomeViews;
 import com.eofelx.eofel.views.LibraryViews;
 import com.eofelx.eofel.views.MessageView;
 import com.eofelx.eofel.views.PersonViews;
+import com.eofelx.eofel.views.home.NotificationActivity;
 import com.eofelx.eofel.views.home.SearchResultViews;
 import com.eofelx.eofel.views.home.WalletActivity;
 import com.ferfalk.simplesearchview.SimpleSearchView;
