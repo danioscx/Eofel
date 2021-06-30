@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Vazz Express</string>
+    <string name="app_name">Vass Express</string>
     <string name="title">Title</string>
     <string name="excerpt">Flask adalah sebuah web app framework. Apa itu Framework? Framework adalah sebuah kode library yang berisi tools dan lainnya yang mana framework dapat membuat pekerjaan developer menjadi lebih mudah, yaitu memberikan kode atau ekstensi yang dapat digunakan kembali untuk operasi umum. Ada beberapa framework di python, termasuk Flask, Django, Tornado dan Pyramid.</string>
     <string name="related_post">Related post</string>
@@ -62,4 +62,15 @@
     <string name="pelanggan">Pelanggan</string>
     <string name="masukan_pesan">Masukan Pesan</string>
     <string name="times">12:12</string>
+    <string name="baru">Baru</string>
+    <string name="kondisi">Kondisi</string>
+    <string name="detail_pruduk">Detail Pruduk</string>
+    <string name="min_pesan">Min Pesan</string>
+    <string name="jumlah">1</string>
+    <string name="rak">Rak</string>
+    <string name="selengkapnya">Selengkapnya</string>
+    <string name="gambar_produk">Gambar produk</string>
+    <string name="iklankan_toko">Iklankan toko</string>
+    <string name="iklankan_product">Iklankan Product</string>
+    <string name="history_iklan">History Iklan</string>
 </resources>

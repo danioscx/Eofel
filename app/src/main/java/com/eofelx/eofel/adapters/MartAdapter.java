@@ -1,6 +1,8 @@
 package com.eofelx.eofel.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.eofelx.eofel.R;
 import com.eofelx.eofel.models.MartModel;
+import com.eofelx.eofel.views.home.mart.MartEditContent;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -76,12 +79,15 @@ public class MartAdapter extends RecyclerView.Adapter<MartAdapter.ViewHolder> {
             mPopup.setOnClickListener(v -> {
                 PopupMenu menu = new PopupMenu(itemView.getContext(), mPopup);
                 menu.inflate(R.menu.mart_menu);
-
+                menu.setOnMenuItemClickListener(item ->  {
+                    if (item.getItemId() == R.id.mart_edit) {
+                        itemView.getContext().startActivity(new Intent(itemView.getContext(), MartEditContent.class));
+                        return true;
+                    }
+                    return false;
+                });
                 menu.show();
             });
-
-
-
             itemView.setOnClickListener(v -> listener.onClick(model));
 
         }

@@ -26,7 +26,7 @@
         <!--<item name="android:windowLightStatusBar" tools:targetApi="M">true</item>-->
         <item name="android:navigationBarColor">@color/white</item>
     </style>
-    <style name="bottomNavigationView" parnt="Widget.MaterialComponents.BottomNavigationView">
+    <style name="bottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="itemIconTint">@drawable/bottom_navigation</item>
         <item name="itemTextColor">@drawable/bottom_navigation</item>
         <item name="itemRippleColor">@color/teal_200</item>

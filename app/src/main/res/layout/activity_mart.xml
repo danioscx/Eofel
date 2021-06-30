@@ -18,9 +18,8 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.appbar.MaterialToolbar
-                android:fitsSystemWindows="true"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                 app:title="@string/toko"
-                android:background="@color/primaryColor"
                 android:id="@+id/mart_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

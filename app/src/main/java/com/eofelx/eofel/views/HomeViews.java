@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.eofelx.eofel.R;
+import com.eofelx.eofel.views.home.MakeAdActivity;
 import com.eofelx.eofel.views.home.MartActivity;
 import com.eofelx.eofel.adapters.Adapter;
 import com.eofelx.eofel.adapters.SliderHomeAdapter;
@@ -24,6 +25,7 @@ import com.eofelx.eofel.models.BaseModel;
 import com.eofelx.eofel.models.Posts;
 import com.eofelx.eofel.models.SliderItem;
 import com.eofelx.eofel.models.SpecialModel;
+import com.eofelx.eofel.views.home.PosActivity;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
@@ -112,6 +114,8 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
 
     private void generateClick() {
         mart.setOnClickListener(v -> startActivity(new Intent(requireActivity(), MartActivity.class)));
+        ads.setOnClickListener(v -> startActivity(new Intent(requireActivity(), MakeAdActivity.class)));
+        pos.setOnClickListener(v -> startActivity(new Intent(requireActivity(), PosActivity.class)));
     }
 
     /* private void refreshAd(View view) {
