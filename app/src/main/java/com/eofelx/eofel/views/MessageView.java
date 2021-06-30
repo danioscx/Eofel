@@ -63,7 +63,9 @@ public class MessageView extends BaseViews {
             public <T extends BaseModel> void onClick(T click) {
                 Bundle bundle = new Bundle();
                 bundle.putString("name", ((MessageModel)click).getName());
-                startActivity(new Intent(requireContext(), OpenMessage.class));
+                Intent intent = new Intent(requireContext(), OpenMessage.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
         recyclerView.setAdapter(adapter);

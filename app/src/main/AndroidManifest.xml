@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Eofel"
         tools:targetApi="n">
-        <activity android:name=".views.message.OpenMessage"></activity>
+        <activity android:name=".views.message.OpenMessage"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity android:name=".views.home.mart.MartEditContent" />
         <activity
             android:name=".activities.WelcomeActivity"
