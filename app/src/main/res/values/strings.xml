@@ -73,4 +73,15 @@
     <string name="iklankan_toko">Iklankan toko</string>
     <string name="iklankan_product">Iklankan Product</string>
     <string name="history_iklan">History Iklan</string>
+    <string name="daging">Daging</string>
+    <string name="etalase">Etalase</string>
+    <string name="durian">Durian</string>
+    <string name="semangka">Semangka</string>
+    <string name="diskon">Diskon</string>
+    <string name="voucher">Voucher</string>
+    <string name="laporan_penjualan">Laporan Penjualan</string>
+    <string name="stock">Stock</string>
+    <string name="performa">Performa</string>
+    <string name="harga_satuan">Harga Satuan</string>
+    <string name="lima_belas">Rp 15.000</string>
 </resources>

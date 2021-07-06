@@ -146,24 +146,7 @@
                     </LinearLayout>
 
 
-                    <LinearLayout
-                        android:layout_marginTop="15dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/kondisi"
-                            android:id="@+id/kondisi"/>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/baru"
-                            android:id="@+id/baru_or_seken"/>
-                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
@@ -200,6 +183,26 @@
                             android:text="@string/baru"
                             android:id="@+id/rak_toko"/>
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/harga_satuan"
+                            android:id="@+id/kondisi"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/lima_belas"
+                            android:id="@+id/baru_or_seken"/>
+                    </LinearLayout>
+
 
                     <TextView
                         android:id="@+id/deskripsi"

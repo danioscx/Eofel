@@ -1,6 +1,8 @@
 package com.eofelx.eofel.models;
 
-public class MartModel extends BaseModel {
+import java.io.Serializable;
+
+public class MartModel extends BaseModel implements Serializable {
 
     private int id;
     private String url;
