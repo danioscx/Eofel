@@ -12,6 +12,8 @@ import android.widget.Button;
 
 import com.eofelx.eofel.R;
 import com.eofelx.eofel.activities.signup.SignUp;
+import com.eofelx.eofel.activities.signup.SignUp2;
+import com.eofelx.eofel.activities.signup.SignUp3;
 import com.eofelx.eofel.adapters.SliderHomeAdapter;
 import com.eofelx.eofel.models.SliderItem;
 import com.google.android.material.textfield.TextInputEditText;
@@ -43,7 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
         }));
 
         sliderView.startAutoCycle();
-        nextFragment(new SignUp());
+        nextFragment(new SignUp3());
     }
 
 
@@ -53,6 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
                 .replace(R.id.next_register, fragment)
                 .commit();
     }
+
 
 
 }

@@ -6,6 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/request"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:indicatorColor="@color/secondaryDarkColor"
+        android:indeterminate="true"
+        android:visibility="gone"/>
+
     <TextView
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
@@ -36,12 +44,12 @@
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:startIconDrawable="@drawable/ic_baseline_location_on_24"
-        android:hint="@string/alamat_lengkap">
+        android:hint="@string/password">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/alamat_lengkap"
+            android:id="@+id/password"
             android:layout_width="match_parent"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 

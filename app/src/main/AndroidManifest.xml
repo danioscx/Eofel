@@ -15,8 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Eofel"
         tools:targetApi="n">
-        <activity android:name=".views.home.pos.StoreFront"></activity>
-        <activity android:name=".views.home.PosActivity"></activity>
+        <activity android:name=".views.home.pos.PerformActivity" />
+        <activity android:name=".views.home.pos.StockActivity" />
+        <activity android:name=".views.home.pos.ReportActivity" />
+        <activity android:name=".views.home.pos.VoucherActivity" />
+        <activity android:name=".views.home.pos.DiscountActivity" />
+        <activity android:name=".views.home.pos.UserActivity" />
+        <activity android:name=".views.home.pos.StoreFront" />
+        <activity android:name=".views.home.PosActivity" />
         <activity android:name=".views.home.MakeAdActivity" />
         <activity
             android:name=".views.message.OpenMessage"
@@ -24,10 +30,12 @@
         <activity android:name=".views.home.mart.MartEditContent" />
         <activity
             android:name=".activities.WelcomeActivity"
-            android:theme="@style/Theme.SignIn" />
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
         <activity
             android:name=".activities.SignUpActivity"
-            android:theme="@style/Theme.SignIn" />
+            android:theme="@style/Theme.SignIn"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize"/>
         <activity android:name=".views.home.NotificationActivity" />
         <activity android:name=".views.home.MartActivity" /> <!-- <meta-data -->
         <!-- android:name="com.google.android.gms.ads.APPLICATION_ID" -->

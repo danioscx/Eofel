@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.eofelx.eofel.R;
+import com.eofelx.eofel.utils.Preferences;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,12 +17,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        handler.postDelayed(() -> {
+            if (Preferences.getStatus(getApplicationContext())) {
                 startActivity(new Intent(MainActivity.this, RootActivity.class));
-                finish();
+            } else {
+                startActivity(new Intent(MainActivity.this, WelcomeActivity.class));
             }
-        }, 2000L);
+            finish();
+        }, 1000L);
     }
 }

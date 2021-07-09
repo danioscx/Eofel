@@ -1,62 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:padding="20dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
 
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/request"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:indicatorColor="@color/secondaryDarkColor"
-        android:indeterminate="true"
-        android:visibility="gone"/>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+      <com.google.android.material.progressindicator.LinearProgressIndicator
+          android:id="@+id/request"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:indeterminate="true"
+          android:visibility="gone"
+          app:indicatorColor="@color/secondaryDarkColor" />
 
-    <TextView
-        android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/info_dasar"
-        style="@style/TextAppearance.AppCompat.Headline"/>
+      <TextView
+          style="@style/TextAppearance.AppCompat.Headline"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="10dp"
+          android:text="@string/info_merchant" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/password_layout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:startIconDrawable="@drawable/ic_baseline_vpn_key_24"
-        android:hint="@string/password">
+      <TextView
+          style="@style/TextAppearance.AppCompat.Medium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:text="@string/upload" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:id="@+id/password"
-            android:inputType="textPassword"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
+      <ImageView
+          android:layout_width="60dp"
+          android:layout_height="60dp"
+          android:layout_gravity="center"
+          android:contentDescription="@string/usaha"
+          android:src="@drawable/ic_outline_person_24" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password_repeat_lay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:startIconDrawable="@drawable/ic_baseline_vpn_key_24"
-        android:hint="@string/ulangi_password">
+      <TextView
+          style="@style/TextAppearance.AppCompat.Title"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="5dp"
+          android:layout_marginTop="15dp"
+          android:layout_marginEnd="5dp"
+          android:layout_marginBottom="10dp"
+          android:text="@string/alamat_lengkap" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password_repeat"
-            android:layout_width="match_parent"
-            android:inputType="textPassword"
-            android:layout_height="wrap_content"/>
-    </com.google.android.material.textfield.TextInputLayout>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:baselineAligned="false"
+          android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/lanjut"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:text="@string/lanjutkan" />
+          <com.google.android.material.textfield.TextInputLayout
+              android:id="@+id/province_lay"
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_margin="5dp"
+              android:layout_weight="1"
+              android:hint="@string/province">
 
-</LinearLayout>
+              <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                  android:focusable="true"
+                  android:id="@+id/province"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:focusableInTouchMode="true"
+                  android:inputType="textAutoComplete" />
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <com.google.android.material.textfield.TextInputLayout
+              android:id="@+id/regencies_lay"
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_margin="5dp"
+              android:layout_weight="1"
+              android:hint="@string/regencies">
+
+              <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                  android:id="@+id/regencies"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:focusableInTouchMode="true"
+                  android:inputType="textPassword" />
+          </com.google.android.material.textfield.TextInputLayout>
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:baselineAligned="false"
+          android:orientation="horizontal">
+
+          <com.google.android.material.textfield.TextInputLayout
+              android:id="@+id/district_lay"
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_margin="5dp"
+              android:layout_weight="1"
+              android:hint="@string/district">
+
+              <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                  android:id="@+id/district"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:imeOptions="actionDone"
+                  android:inputType="textAutoComplete" />
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <com.google.android.material.textfield.TextInputLayout
+              android:id="@+id/pos_code_lay"
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_margin="5dp"
+              android:layout_weight="1"
+              android:hint="@string/code_pos">
+
+              <com.google.android.material.textfield.TextInputEditText
+                  android:id="@+id/pos_code"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:inputType="textPassword" />
+          </com.google.android.material.textfield.TextInputLayout>
+
+      </LinearLayout>
+
+      <Button
+          android:id="@+id/lanjut"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="end"
+          android:layout_marginTop="10dp"
+          android:text="@string/lanjutkan" />
+  </LinearLayout>
+
+</ScrollView>

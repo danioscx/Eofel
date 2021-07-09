@@ -1,30 +1,49 @@
 package com.eofelx.eofel.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.eofelx.eofel.App;
 import com.eofelx.eofel.R;
 import com.eofelx.eofel.adapters.SliderHomeAdapter;
 import com.eofelx.eofel.models.SliderItem;
+import com.eofelx.eofel.utils.Preferences;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.smarteist.autoimageslider.SliderView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class WelcomeActivity extends AppCompatActivity {
 
     Button button;
     TextInputLayout email_layout, pass_layout;
-    TextInputEditText email, pass;
+    EditText email, pass;
+
+    NestedScrollView scrollView;
+    RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +53,22 @@ public class WelcomeActivity extends AppCompatActivity {
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         //Validation id from xml
+        queue = Volley.newRequestQueue(getApplicationContext());
         TextView signUp = findViewById(R.id.belum_punya);
-        email_layout = findViewById(R.id.wm_email_ly);
-        pass_layout = findViewById(R.id.wm_pass_ly);
-        email = findViewById(R.id.wm_email_edit);
-        pass = findViewById(R.id.wm_pass_edit);
+        /*email_layout = findViewById(R.id.wm_email_ly);
+        pass_layout = findViewById(R.id.wm_pass_ly);*/
+//        email = findViewById(R.id.wm_email_edit);
+//        pass = findViewById(R.id.wm_pass_edit);
+//        scrollView = findViewById(R.id.layout);
+
+        /*if (pass.isFocusable()) {
+            System.out.println("focused");
+            scrollView.setTranslationY(-20f);
+        }*/
 
         button = findViewById(R.id.validation);
 
-        signUp.setOnClickListener(v-> {
-            startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
-        });
+        signUp.setOnClickListener(v-> startActivity(new Intent(getApplicationContext(), SignUpActivity.class)));
 
         SliderView sliderView = findViewById(R.id.wm_slider);
         int[] url = new int[] {
@@ -58,7 +82,7 @@ public class WelcomeActivity extends AppCompatActivity {
         }));
 
         sliderView.startAutoCycle();
-        dataValidation();
+//        dataValidation();
     }
 
     private void dataValidation() {
@@ -67,7 +91,36 @@ public class WelcomeActivity extends AppCompatActivity {
                 email_layout.setError("Huruf tidak boleh kurang 3 huruf!");
                 pass_layout.setError("Password tidak boleh kurang dari 3 huruf atau angka!");
             } else {
-                //TODO implementation
+                JSONObject object = new JSONObject();
+                try {
+                    object.put("email", email.getText().toString());
+                    object.put("password", Objects.requireNonNull(pass.getText()).toString());
+                    System.out.println(pass.getText().toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
+                        App.URL + "/user/sign/in", object, response -> {
+                    try {
+                        String string = Integer.toString(Integer.parseInt(response.getString("status")));
+                        if (response.getString("status").equals(string)) {
+                            Preferences.setStatus(getApplicationContext(), true);
+                            Preferences.setToken(getApplicationContext(), response.getString("token"));
+                            startActivity(new Intent(WelcomeActivity.this, RootActivity.class));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }, System.out::println) {
+                    @Override
+                    public Map<String, String> getHeaders() {
+                        Map<String, String>  params = new HashMap<>();
+                        params.put("Content-Type", "application/json; charset=utf-8");
+                        return params;
+                    }
+                };
+                queue.add(request);
+
             }
         });
     }

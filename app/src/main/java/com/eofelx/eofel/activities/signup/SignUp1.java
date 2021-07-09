@@ -12,16 +12,33 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.eofelx.eofel.App;
 import com.eofelx.eofel.R;
 import com.eofelx.eofel.views.BaseViews;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class SignUp1 extends BaseViews {
+
+    LinearProgressIndicator indicator;
+    TextInputEditText editText, address;
+    TextInputLayout layoutEditText, layoutAddress;
+    String name, email;
+    RequestQueue queue;
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -34,16 +51,18 @@ public class SignUp1 extends BaseViews {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Button button = view.findViewById(R.id.lanjut);
-        TextInputEditText editText = view.findViewById(R.id.nomor_telpon);
-        TextInputLayout layoutEditText = view.findViewById(R.id.layout_nomor_telepon);
-        TextInputEditText address = view.findViewById(R.id.alamat_lengkap);
-        TextInputLayout layoutAddress = view.findViewById(R.id.layout_alamat_lengkap);
+        editText = view.findViewById(R.id.nomor_telpon);
+        layoutEditText = view.findViewById(R.id.layout_nomor_telepon);
+        address = view.findViewById(R.id.password);
+        layoutAddress = view.findViewById(R.id.layout_alamat_lengkap);
+        indicator = view.findViewById(R.id.request);
+        queue = Volley.newRequestQueue(requireContext());
 
         assert getArguments() != null;
-        String name = getArguments().getString("name");
-        String email = getArguments().getString("email");
+        name = getArguments().getString("name");
+        email = getArguments().getString("email");
 
-        Toast.makeText(requireContext(), name + email, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(requireContext(), name + email, Toast.LENGTH_SHORT).show();
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -73,16 +92,15 @@ public class SignUp1 extends BaseViews {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (count < 3) {
-                    layoutAddress.setError("Tidak boleh kurang dari 3 huruf");
-                } else {
-                    layoutAddress.setError(null);
-                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (s.toString().length() < 3) {
+                    layoutAddress.setError("Tidak boleh kurang dari 3 huruf");
+                } else {
+                    layoutAddress.setError(null);
+                }
             }
         });
 
@@ -91,11 +109,68 @@ public class SignUp1 extends BaseViews {
                 layoutEditText.setError("Nomor telepon tidak valid");
                 layoutAddress.setError("Tidak boleh kurang dari 3 huruf");
             } else {
-                getParentFragmentManager().beginTransaction()
-                        .replace(R.id.next_register, new SignUp2())
-                        .addToBackStack(null)
-                        .commit();
+                System.out.println(address.getText().toString());
+                String url = App.URL + "/app/check/phone";
+                JSONObject object = new JSONObject();
+                try {
+                    object.put(App.USER_PHONE, Objects.requireNonNull(editText.getText()).toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                indicator.setVisibility(View.VISIBLE);
+                //Check email
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
+                        url, object, response -> {
+                    try {
+                        if (response.getString("status").equals("409")) {
+                            System.out.println("already exists");
+                            layoutEditText.setError("Phone number already exists");
+                            indicator.setVisibility(View.GONE);
+                        } else {
+                            applyUser();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }, System.out::println) {
+                    @Override
+                    public Map<String, String> getHeaders() {
+                        Map<String, String> header = new HashMap<>();
+                        header.put("Content-Type", "application/json; charset=utf-8");
+                        return header;
+                    }
+                };
+                queue.add(request);
             }
         });
+    }
+
+    private void applyUser() {
+        String url = App.URL + "/app/create/user";
+        JSONObject object = new JSONObject();
+        try {
+            object.put(App.USER_NAME, name);
+            object.put(App.USER_EMAIL, email);
+            object.put(App.USER_PHONE, Objects.requireNonNull(editText.getText()).toString());
+            object.put(App.USER_PASSWORD, Objects.requireNonNull(address.getText()).toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        indicator.setVisibility(View.VISIBLE);
+        //Check email
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
+                url, object, response -> {
+            System.out.println("already ");
+
+        }, System.out::println) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> header = new HashMap<>();
+                header.put("Content-Type", "application/json; charset=utf-8");
+                return header;
+            }
+        };
+        queue.add(request);
     }
 }

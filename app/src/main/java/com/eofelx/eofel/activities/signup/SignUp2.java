@@ -34,7 +34,7 @@ public class SignUp2 extends BaseViews {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Button button = view.findViewById(R.id.lanjut);
-        TextInputEditText editText = view.findViewById(R.id.kota);
+        /*TextInputEditText editText = view.findViewById(R.id.kota);
         TextInputLayout p_editText = view.findViewById(R.id.kota_layout);
         TextInputEditText repeat = view.findViewById(R.id.kecamatan);
         TextInputLayout p_repeat = view.findViewById(R.id.layout_kecamatan);
@@ -91,5 +91,6 @@ public class SignUp2 extends BaseViews {
                         .commit();
             }
         });
+    }*/
     }
 }

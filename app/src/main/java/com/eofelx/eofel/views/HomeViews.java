@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.eofelx.eofel.R;
+import com.eofelx.eofel.utils.Preferences;
 import com.eofelx.eofel.views.home.MakeAdActivity;
 import com.eofelx.eofel.views.home.MartActivity;
 import com.eofelx.eofel.adapters.Adapter;
@@ -34,7 +35,6 @@ import java.util.Objects;
 
 public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
 
-    private static final String ADMOB_AD_UNIT_ID = "ca-app-pub-3940256099942544/2247696110";
 
     private RequestQueue queue;
 
@@ -108,6 +108,8 @@ public class HomeViews extends BaseViews implements BaseViews.OnBackPress {
         ads = view.findViewById(R.id.home_ads);
         promo = view.findViewById(R.id.home_promo);
         pos = view.findViewById(R.id.home_pos);
+
+        System.out.println(Preferences.getToken(requireContext()));
 
         generateClick();
     }

@@ -12,13 +12,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.eofelx.eofel.App;
 import com.eofelx.eofel.R;
 import com.eofelx.eofel.views.BaseViews;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class SignUp extends BaseViews {
@@ -26,6 +37,10 @@ public class SignUp extends BaseViews {
     Button button;
     TextInputEditText name, email;
     TextInputLayout names, emails;
+
+    LinearProgressIndicator indicator;
+
+    RequestQueue queue;
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -42,6 +57,8 @@ public class SignUp extends BaseViews {
         email = view.findViewById(R.id.alamat_email);
         names = view.findViewById(R.id.layout_name);
         emails = view.findViewById(R.id.emails);
+        queue = Volley.newRequestQueue(requireActivity());
+        indicator = view.findViewById(R.id.request);
         name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -70,16 +87,16 @@ public class SignUp extends BaseViews {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (count < 3) {
-                    emails.setError("Tidak boleh kurang dari 3 huruf");
-                } else {
-                    emails.setError(null);
-                }
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                System.out.println(s.toString().length());
+                if (s.toString().length() < 3) {
+                    emails.setError("Tidak boleh kurang dari 3 huruf");
+                } else {
+                    emails.setError(null);
+                }
             }
         });
         nextView();
@@ -91,8 +108,36 @@ public class SignUp extends BaseViews {
                 names.setError(getString(R.string.error_name));
                 emails.setError(getString(R.string.error_name));
             } else {
+                String url = App.URL + "/app/check/email";
+                JSONObject object = new JSONObject();
+                try {
+                    object.put("email", Objects.requireNonNull(email.getText()).toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                indicator.setVisibility(View.VISIBLE);
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,
+                        url, object, response -> {
+                    try {
+                        if (response.getString("status").equals("409")) {
+                            System.out.println("already exists");
+                            emails.setError("Email already exists");
+                            indicator.setVisibility(View.GONE);
+                        } else
+                            nextFragment(new SignUp1());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
-                nextFragment(new SignUp1());
+                }, System.out::println) {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> header = new HashMap<>();
+                        header.put("Content-Type", "application/json; charset=utf-8");
+                        return header;
+                    }
+                };
+                queue.add(request);
             }
         });
     }

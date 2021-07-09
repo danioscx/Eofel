@@ -1,11 +1,14 @@
 package com.eofelx.eofel.activities.signup;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -37,8 +40,9 @@ public class SignUp3 extends BaseViews {
         super.onViewCreated(view, savedInstanceState);
         Button button = view.findViewById(R.id.lanjut);
         TextInputEditText editText = view.findViewById(R.id.password);
-        TextInputLayout p_editText = view.findViewById(R.id.password_layout);
-        TextInputEditText repeat = view.findViewById(R.id.password_repeat);
+        AutoCompleteTextView p_editText = view.findViewById(R.id.province);
+        p_editText.setFocusable(true);
+        /*TextInputEditText repeat = view.findViewById(R.id.password_repeat);
         TextInputLayout p_repeat = view.findViewById(R.id.password_repeat_lay);
         progressIndicator = view.findViewById(R.id.request);
         editText.addTextChangedListener(new TextWatcher() {
@@ -93,6 +97,6 @@ public class SignUp3 extends BaseViews {
                         .addToBackStack(null)
                         .commit();
             }
-        });
+        });*/
     }
 }

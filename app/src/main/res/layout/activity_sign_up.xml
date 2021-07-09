@@ -1,55 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:fitsSystemWindows="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context=".activities.SignUpActivity">
 
-
-    <androidx.core.widget.NestedScrollView
+    <com.smarteist.autoimageslider.SliderView
+        android:id="@+id/sign_slider"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="250dp"
+        app:sliderAnimationDuration="900"
+        app:sliderAutoCycleDirection="back_and_forth"
+        app:sliderAutoCycleEnabled="true"
+        app:sliderIndicatorAnimationDuration="900"
+        app:sliderIndicatorGravity="center_horizontal|bottom"
+        app:sliderIndicatorMargin="15dp"
+        app:sliderIndicatorOrientation="horizontal"
+        app:sliderIndicatorPadding="3dp"
+        app:sliderIndicatorRadius="2dp"
+        app:sliderScrollTimeInSec="2"
+        app:sliderStartAutoCycle="true" />
 
-        <LinearLayout
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_marginTop="-12dp"
+            android:fitsSystemWindows="true"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="0dp">
 
-            <com.smarteist.autoimageslider.SliderView
-                android:id="@+id/sign_slider"
+            <FrameLayout
+                android:fitsSystemWindows="true"
+                android:id="@+id/next_register"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                app:sliderAnimationDuration="900"
-                app:sliderAutoCycleDirection="back_and_forth"
-                app:sliderAutoCycleEnabled="true"
-                app:sliderIndicatorAnimationDuration="900"
-                app:sliderIndicatorGravity="center_horizontal|bottom"
-                app:sliderIndicatorMargin="15dp"
-                app:sliderIndicatorOrientation="horizontal"
-                app:sliderIndicatorPadding="3dp"
-                app:sliderIndicatorRadius="2dp"
-                app:sliderScrollTimeInSec="2"
-                app:sliderStartAutoCycle="true" />
+                android:layout_height="match_parent"
+                android:layout_gravity="center|top">
 
-
-            <androidx.cardview.widget.CardView
-                app:cardElevation="0dp"
-                android:layout_marginTop="-12dp"
-                app:cardCornerRadius="30dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:id="@+id/next_register">
-
-                </FrameLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+            </FrameLayout>
+        </androidx.cardview.widget.CardView>
 
 </LinearLayout>

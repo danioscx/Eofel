@@ -51,6 +51,7 @@ public class PosAdapter extends RecyclerView.Adapter<PosAdapter.ViewHolder> {
 
         ImageView imageView;
         TextView textView;
+
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.name);

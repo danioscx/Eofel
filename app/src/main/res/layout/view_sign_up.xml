@@ -18,6 +18,14 @@
             android:text="@string/info_dasar"
             style="@style/TextAppearance.AppCompat.Headline"/>
 
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/request"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:indicatorColor="@color/secondaryDarkColor"
+            android:indeterminate="true"
+            android:visibility="gone"/>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layout_name"
