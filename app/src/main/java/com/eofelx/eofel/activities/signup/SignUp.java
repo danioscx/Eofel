@@ -124,7 +124,12 @@ public class SignUp extends BaseViews {
                             emails.setError("Email already exists");
                             indicator.setVisibility(View.GONE);
                         } else
-                            nextFragment(new SignUp1());
+                        {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("name", Objects.requireNonNull(name.getText()).toString());
+                            bundle.putString("email", Objects.requireNonNull(email.getText()).toString());
+                            requireFragment(new SignUp1(), R.id.next_register, bundle);
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -140,17 +145,5 @@ public class SignUp extends BaseViews {
                 queue.add(request);
             }
         });
-    }
-
-    private void nextFragment(Fragment fragment) {
-        Bundle bundle = new Bundle();
-        bundle.putString("name", Objects.requireNonNull(name.getText()).toString());
-        bundle.putString("email", Objects.requireNonNull(email.getText()).toString());
-        fragment.setArguments(bundle);
-        getParentFragmentManager()
-                .beginTransaction()
-                .replace(R.id.next_register, fragment)
-                .addToBackStack(null)
-                .commit();
     }
 }

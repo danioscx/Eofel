@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="20dp"
     android:layout_width="match_parent"
@@ -13,6 +14,7 @@
         style="@style/TextAppearance.AppCompat.Headline"/>
 
     <com.google.android.material.textfield.TextInputLayout
+        app:errorEnabled="true"
         android:id="@+id/nama_toko_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +29,8 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layout_kecamatan"
+        app:errorEnabled="true"
+        android:id="@+id/layout_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -35,12 +38,11 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/description"
-            android:inputType="textLongMessage"
-            android:lines="10"
-            android:minLines="6"
+            android:inputType="textMultiLine"
             android:gravity="top|start"
             android:layout_width="match_parent"
-            android:layout_height="100dp"/>
+            android:minHeight="100dp"
+            android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

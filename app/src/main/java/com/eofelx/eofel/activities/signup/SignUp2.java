@@ -12,12 +12,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.eofelx.eofel.R;
+import com.eofelx.eofel.utils.Preferences;
 import com.eofelx.eofel.views.BaseViews;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.vass.api.Vass;
+import com.vass.api.model.User;
+import com.vass.api.region.Requests;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class SignUp2 extends BaseViews {
@@ -34,12 +42,12 @@ public class SignUp2 extends BaseViews {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Button button = view.findViewById(R.id.lanjut);
-        /*TextInputEditText editText = view.findViewById(R.id.kota);
-        TextInputLayout p_editText = view.findViewById(R.id.kota_layout);
-        TextInputEditText repeat = view.findViewById(R.id.kecamatan);
-        TextInputLayout p_repeat = view.findViewById(R.id.layout_kecamatan);
+        TextInputEditText toko = view.findViewById(R.id.toko);
+        TextInputLayout p_editText = view.findViewById(R.id.nama_toko_layout);
+        TextInputEditText description = view.findViewById(R.id.description);
+        TextInputLayout p_repeat = view.findViewById(R.id.layout_description);
 
-        editText.addTextChangedListener(new TextWatcher() {
+        toko.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -47,18 +55,18 @@ public class SignUp2 extends BaseViews {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (count < 3) {
-                    p_editText.setError("Tidak boleh kurang dari 3 huruf");
-                } else
-                    p_editText.setError(null);
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (s.toString().length() < 3) {
+                    p_editText.setError("Tidak boleh kurang dari 3 huruf");
+                } else
+                    p_editText.setError(null);
             }
         });
-        repeat.addTextChangedListener(new TextWatcher() {
+        description.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -66,24 +74,38 @@ public class SignUp2 extends BaseViews {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (count < 3) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().length() < 3) {
                     p_repeat.setError("Tidak boleh kurang dari 3 huruf");
                 } else {
                     p_repeat.setError(null);
                 }
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
         });
 
         button.setOnClickListener(v -> {
-            if (Objects.requireNonNull(editText.getText()).length() < 3 && Objects.requireNonNull(repeat.getText()).length() < 3) {
+            if (Objects.requireNonNull(toko.getText()).length() < 3 && Objects.requireNonNull(description.getText()).length() < 3) {
                 p_editText.setError("Kota tidak valid");
                 p_repeat.setError("Kecamatan tidak valid!");
             } else {
+                JSONObject object = new JSONObject();
+                try {
+                    object.put("name", toko.getText().toString());
+                    object.put("description", Objects.requireNonNull(description.getText()).toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                Map<String, String>  params = new HashMap<>();
+                params.put("Content-Type", "application/json; charset=utf-8");
+                params.put("token", Preferences.getToken(requireContext()));
+                Requests<User> requests = new Requests<>();
+                requests.insert(requireContext(), Vass.CREATE_MERCHANT)
+                        .header(params, object)
+                        .commit();
                 getParentFragmentManager()
                         .beginTransaction()
                         .replace(R.id.next_register, new SignUp3())
@@ -91,6 +113,5 @@ public class SignUp2 extends BaseViews {
                         .commit();
             }
         });
-    }*/
     }
 }

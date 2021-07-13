@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp">
 
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:orientation="vertical">
       <com.google.android.material.progressindicator.LinearProgressIndicator
           android:id="@+id/request"
           android:layout_width="match_parent"
@@ -23,45 +19,15 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginBottom="10dp"
-          android:text="@string/info_merchant" />
-
-      <TextView
-          style="@style/TextAppearance.AppCompat.Medium"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:text="@string/upload" />
-
-      <ImageView
-          android:layout_width="60dp"
-          android:layout_height="60dp"
-          android:layout_gravity="center"
-          android:contentDescription="@string/usaha"
-          android:src="@drawable/ic_outline_person_24" />
-
-      <TextView
-          style="@style/TextAppearance.AppCompat.Title"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="5dp"
-          android:layout_marginTop="15dp"
-          android:layout_marginEnd="5dp"
-          android:layout_marginBottom="10dp"
           android:text="@string/alamat_lengkap" />
 
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:baselineAligned="false"
-          android:orientation="horizontal">
 
           <com.google.android.material.textfield.TextInputLayout
               android:id="@+id/province_lay"
               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-              android:layout_width="0dp"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_margin="5dp"
-              android:layout_weight="1"
               android:hint="@string/province">
 
               <com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -76,10 +42,9 @@
           <com.google.android.material.textfield.TextInputLayout
               android:id="@+id/regencies_lay"
               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-              android:layout_width="0dp"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_margin="5dp"
-              android:layout_weight="1"
               android:hint="@string/regencies">
 
               <com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -87,24 +52,15 @@
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:focusableInTouchMode="true"
-                  android:inputType="textPassword" />
+                  android:inputType="text" />
           </com.google.android.material.textfield.TextInputLayout>
-
-      </LinearLayout>
-
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:baselineAligned="false"
-          android:orientation="horizontal">
 
           <com.google.android.material.textfield.TextInputLayout
               android:id="@+id/district_lay"
               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-              android:layout_width="0dp"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_margin="5dp"
-              android:layout_weight="1"
               android:hint="@string/district">
 
               <com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -115,23 +71,55 @@
                   android:inputType="textAutoComplete" />
           </com.google.android.material.textfield.TextInputLayout>
 
-          <com.google.android.material.textfield.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/villages_lay"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="@string/villages">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/villages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="textAutoComplete" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
               android:id="@+id/pos_code_lay"
               style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-              android:layout_width="0dp"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_margin="5dp"
-              android:layout_weight="1"
               android:hint="@string/code_pos">
 
               <com.google.android.material.textfield.TextInputEditText
                   android:id="@+id/pos_code"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:inputType="textPassword" />
+                  android:inputType="text" />
           </com.google.android.material.textfield.TextInputLayout>
 
-      </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/detail"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="@string/detail_alamat">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/detail_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="auto"
+            android:focusableInTouchMode="true"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
       <Button
           android:id="@+id/lanjut"
@@ -140,6 +128,5 @@
           android:layout_gravity="end"
           android:layout_marginTop="10dp"
           android:text="@string/lanjutkan" />
-  </LinearLayout>
 
-</ScrollView>
+</LinearLayout>

@@ -6,52 +6,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#E6E6E6"
     tools:context=".views.home.mart.MartEditContent">
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-<!--
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.appbar.MaterialToolbar
                 app:layout_scrollFlags="scroll|enterAlways"
                 android:layout_width="match_parent"
-                android:layout_height="69dp"/>
+                android:id="@+id/toolbar"
+                app:title="@string/edit"
+                app:titleTextColor="@color/white"
+                app:navigationIconTint="@color/white"
+                app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+                android:layout_height="wrap_content"/>
 
-        </com.google.android.material.appbar.AppBarLayout>-->
+        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
+            android:padding="10dp"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
+                android:padding="10dp"
+                android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-               <!-- <com.smarteist.autoimageslider.SliderView
-                    android:id="@+id/slider_edit"
+
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    app:sliderStartAutoCycle="true"
-                    app:sliderAnimationDuration="600"
-                    app:sliderIndicatorAnimationDuration="600"
-                    app:sliderScrollTimeInSec="3"/>-->
+                    android:layout_height="wrap_content"
+                    android:text="@string/informasi_produk"
+                    style="@style/TextAppearance.AppCompat.Headline"/>
 
                 <LinearLayout
-
-                    android:background="@color/white"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <!--<LinearLayout
+
+                    <LinearLayout
+                        android:layout_marginBottom="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:id="@+id/image_product"
+                        tools:ignore="UseCompoundDrawables">
 
                         <TextView
                             android:layout_width="0dp"
@@ -66,16 +74,18 @@
                             android:layout_height="wrap_content"
                             android:src="@drawable/ic_baseline_edit_24"
                             android:contentDescription="@string/special_title"/>
-                    </LinearLayout>-->
+                    </LinearLayout>
+
                     <ImageView
                         android:contentDescription="@string/bantuan"
-                        android:layout_width="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_height="150dp"
+                        android:layout_width="80dp"
+                        android:maxWidth="80dp"
+                        android:scaleType="fitXY"
+                        android:layout_height="80dp"
                         android:src="@drawable/slider1"/>
                 </LinearLayout>
 
-                <LinearLayout
+                <!--<LinearLayout
                     android:background="@color/white"
                     android:padding="15dp"
                     android:layout_width="match_parent"
@@ -85,7 +95,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        tools:ignore="UseCompoundDrawables">
                         <TextView
                             android:layout_marginTop="5dp"
                             android:layout_width="0dp"
@@ -116,20 +127,22 @@
                         android:id="@+id/title_barang"
                         style="@style/TextAppearance.AppCompat.Medium"/>
 
-                </LinearLayout>
+                </LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:layout_marginTop="10dp"
-                    android:padding="20dp"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginBottom="15dp"
+                        android:orientation="horizontal"
+                        android:id="@+id/detail_product_click"
+                        tools:ignore="UseCompoundDrawables">
                         <TextView
                             android:layout_width="0dp"
                             android:layout_weight="1"
@@ -145,79 +158,93 @@
                             android:contentDescription="@string/special_title"/>
                     </LinearLayout>
 
-
-
-                    <LinearLayout
-                        android:layout_marginTop="10dp"
+                    <TextView
+                        style="@style/TextAppearance.AppCompat.Small"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/min_pesan"
-                            android:id="@+id/min_pesan"/>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/jumlah"
-                            android:id="@+id/jumlah"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_marginTop="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/rak"
-                            android:id="@+id/rak"/>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/durian"
-                            android:id="@+id/rak_toko"/>
-                    </LinearLayout>
+                        android:text="@string/nama_produk"/>
 
-                    <LinearLayout
-                        android:layout_marginTop="15dp"
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/harga_satuan"
-                            android:id="@+id/kondisi"/>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/lima_belas"
-                            android:id="@+id/baru_or_seken"/>
-                    </LinearLayout>
+                        android:text="Buah naga dari Segar asli Surabaya"
+                        style="@style/TextAppearance.AppCompat.Medium"
+                        android:id="@+id/product_name"
+                        android:layout_marginBottom="10dp"/>
 
 
                     <TextView
-                        android:id="@+id/deskripsi"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:text="@string/search_hint" />
+                        android:text="@string/price"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/selengkapnya"
-                        android:textStyle="bold"
-                        android:textColor="@color/primaryColor"
-                        android:id="@+id/baca_selengkapnya"/>
+                        android:text="@string/lima_belas"
+                        style="@style/TextAppearance.AppCompat.Medium"
+                        android:layout_marginBottom="10dp"
+                        android:id="@+id/product_price"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stock"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="4"
+                        style="@style/TextAppearance.AppCompat.Medium"
+                        android:id="@+id/p"/>
+
+
+
+                    <LinearLayout
+                        android:id="@+id/product_description"
+                        android:layout_marginTop="25dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:orientation="horizontal"
+                        tools:ignore="UseCompoundDrawables">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="@string/deskipsi_produk"
+                            style="@style/TextAppearance.AppCompat.Title"
+                            android:id="@+id/desc"/>
+                        <ImageView
+                            android:layout_marginTop="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_baseline_edit_24"
+                            android:contentDescription="@string/special_title"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="25dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:orientation="horizontal"
+                        tools:ignore="UseCompoundDrawables">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="@string/status_product"
+                            style="@style/TextAppearance.AppCompat.Title"
+                            android:id="@+id/warm"/>
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/status_product"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>

@@ -30,12 +30,12 @@
         <activity android:name=".views.home.mart.MartEditContent" />
         <activity
             android:name=".activities.WelcomeActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize"/>
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".activities.SignUpActivity"
             android:theme="@style/Theme.SignIn"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:windowSoftInputMode="stateAlwaysVisible|adjustResize"/>
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".views.home.NotificationActivity" />
         <activity android:name=".views.home.MartActivity" /> <!-- <meta-data -->
         <!-- android:name="com.google.android.gms.ads.APPLICATION_ID" -->

@@ -91,4 +91,25 @@
     <string name="district">Kecamatan</string>
     <string name="code_pos">Kode pos</string>
     <string name="upload">Upload foto toko anda</string>
+    <string name="detail_alamat" translatable="false">Detail Alamat</string>
+    <string name="exit">Exit</string>
+    <string name="welcome">Selamat datang</string>
+    <string name="sunday">Sunday</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="always_open">Always Open</string>
+    <string name="closed">Closed</string>
+    <string name="open">Open</string>
+    <string name="villages">Desa</string>
+    <string name="informasi_produk">Informasi produk</string>
+    <string name="nama_produk">Nama Produk</string>
+    <string name="price">Harga</string>
+    <string name="deskipsi_produk">Deskipsi produk</string>
+    <string name="status_product">Status Produk</string>
+
+
 </resources>

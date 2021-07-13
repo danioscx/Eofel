@@ -5,8 +5,6 @@ import androidx.core.widget.NestedScrollView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -23,7 +21,7 @@ import com.eofelx.eofel.R;
 import com.eofelx.eofel.adapters.SliderHomeAdapter;
 import com.eofelx.eofel.models.SliderItem;
 import com.eofelx.eofel.utils.Preferences;
-import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.textfield.TextInputLayout;
 import com.smarteist.autoimageslider.SliderView;
 
@@ -43,6 +41,7 @@ public class WelcomeActivity extends AppCompatActivity {
     EditText email, pass;
 
     NestedScrollView scrollView;
+    LinearProgressIndicator indicator;
     RequestQueue queue;
 
     @Override
@@ -55,16 +54,13 @@ public class WelcomeActivity extends AppCompatActivity {
         //Validation id from xml
         queue = Volley.newRequestQueue(getApplicationContext());
         TextView signUp = findViewById(R.id.belum_punya);
-        /*email_layout = findViewById(R.id.wm_email_ly);
-        pass_layout = findViewById(R.id.wm_pass_ly);*/
-//        email = findViewById(R.id.wm_email_edit);
-//        pass = findViewById(R.id.wm_pass_edit);
-//        scrollView = findViewById(R.id.layout);
+        email_layout = findViewById(R.id.wm_email_ly);
+        pass_layout = findViewById(R.id.wm_pass_ly);
+        email = findViewById(R.id.wm_email_edit);
+        pass = findViewById(R.id.wm_pass_edit);
+        indicator = findViewById(R.id.indicator);
+        scrollView = findViewById(R.id.layout);
 
-        /*if (pass.isFocusable()) {
-            System.out.println("focused");
-            scrollView.setTranslationY(-20f);
-        }*/
 
         button = findViewById(R.id.validation);
 
@@ -82,7 +78,7 @@ public class WelcomeActivity extends AppCompatActivity {
         }));
 
         sliderView.startAutoCycle();
-//        dataValidation();
+        dataValidation();
     }
 
     private void dataValidation() {
@@ -91,6 +87,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 email_layout.setError("Huruf tidak boleh kurang 3 huruf!");
                 pass_layout.setError("Password tidak boleh kurang dari 3 huruf atau angka!");
             } else {
+                indicator.setVisibility(View.VISIBLE);
                 JSONObject object = new JSONObject();
                 try {
                     object.put("email", email.getText().toString());
@@ -111,7 +108,10 @@ public class WelcomeActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }, System.out::println) {
+                }, error -> {
+                    System.out.println(error.networkResponse);
+                    indicator.setVisibility(View.GONE);
+                }) {
                     @Override
                     public Map<String, String> getHeaders() {
                         Map<String, String>  params = new HashMap<>();

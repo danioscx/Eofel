@@ -1,47 +1,43 @@
 package com.eofelx.eofel.views.home.mart;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.text.InputFilter;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.TextView;
+import android.view.MenuItem;
+import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import com.eofelx.eofel.R;
-import com.eofelx.eofel.adapters.SliderHomeAdapter;
-import com.eofelx.eofel.models.SliderItem;
-import com.smarteist.autoimageslider.SliderView;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.material.appbar.MaterialToolbar;
 
 public class MartEditContent extends AppCompatActivity {
-    int maxLength = 150;
+
+    LinearLayout productImage, productDetail, productDesc;
+    SwitchCompat compat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mart_edit_content);
 
-        TextView baca = findViewById(R.id.baca_selengkapnya);
-        TextView desc = findViewById(R.id.deskripsi);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        String text = getResources().getString(R.string.special_title);
-        desc.setText(text.substring(0, maxLength));
+        productImage = findViewById(R.id.image_product);
+        productDetail = findViewById(R.id.detail_product_click);
+        productDesc = findViewById(R.id.product_description);
 
-        baca.setOnClickListener(v -> {
-            desc.setText(text);
-        });
+        compat = findViewById(R.id.status_product);
+        compat.setChecked(true);
+    }
 
-        /*SliderView sliderView = findViewById(R.id.slider_edit);
-        int[] url = new int[] {
-                R.raw.slider1, R.raw.slider2, R.raw.slider3, R.raw.slider4
-        };
-        List<SliderItem> items = new ArrayList<>();
-        for (int j : url) {
-            items.add(new SliderItem(j));
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
         }
-        sliderView.setSliderAdapter(new SliderHomeAdapter(items, item -> {
-        }));*/
+        return false;
     }
 }

@@ -1,13 +1,10 @@
 package com.eofelx.eofel.activities.signup;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
@@ -15,18 +12,33 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.eofelx.eofel.R;
+import com.eofelx.eofel.utils.Preferences;
 import com.eofelx.eofel.views.BaseViews;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
+import com.vass.api.Vass;
+import com.vass.api.model.Region;
+import com.vass.api.model.User;
+import com.vass.api.region.Requests;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class SignUp3 extends BaseViews {
 
     LinearProgressIndicator progressIndicator;
+    AutoCompleteTextView province, regencies, district, villages;
+    TextInputEditText address, pos_code;
+    Button button;
+    String province_id = "";
+    String regencies_id = "";
+    String district_id = "";
+    String villages_id = "";
 
     @Nullable
     @org.jetbrains.annotations.Nullable
@@ -38,65 +50,106 @@ public class SignUp3 extends BaseViews {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button button = view.findViewById(R.id.lanjut);
-        TextInputEditText editText = view.findViewById(R.id.password);
-        AutoCompleteTextView p_editText = view.findViewById(R.id.province);
-        p_editText.setFocusable(true);
-        /*TextInputEditText repeat = view.findViewById(R.id.password_repeat);
-        TextInputLayout p_repeat = view.findViewById(R.id.password_repeat_lay);
         progressIndicator = view.findViewById(R.id.request);
-        editText.addTextChangedListener(new TextWatcher() {
+        button = view.findViewById(R.id.lanjut);
+        province = view.findViewById(R.id.province);
+        regencies = view.findViewById(R.id.regencies);
+        district = view.findViewById(R.id.district);
+        villages = view.findViewById(R.id.villages);
+        address = view.findViewById(R.id.detail_edit);
+        pos_code = view.findViewById(R.id.pos_code);
+        Requests<Region> requests = new Requests<>();
+        requests.get(requireContext(), Vass.ALL_PROVINCES).apply(province, new Requests.ItemClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+            public void onClick(String position) {
+                getRegencies(position);
+                province_id = position;
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().length() < 6) {
-                    p_editText.setError("Password tidak boleh kurang dari 6 huruf");
-                } else
-                    p_editText.setError(null);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        repeat.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.toString().equals(Objects.requireNonNull(editText.getText()).toString())) {
-                    p_repeat.setError("Password harus sama!");
-                } else {
-                    p_repeat.setError(null);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
+            public void getText(String name) {
+                province.setText(name);
             }
         });
+
+        validate();
+
+    }
+
+    private void getRegencies(String position) {
+        Requests<Region> requests = new Requests<>();
+        requests.get(requireContext(), Vass.REGENCIES + position).apply(regencies, new Requests.ItemClickListener() {
+            @Override
+            public void onClick(String position) {
+                getDistricts(position);
+                regencies_id = position;
+            }
+
+            @Override
+            public void getText(String name) {
+                regencies.setText(name);
+            }
+        });
+    }
+
+    private void getDistricts(String position) {
+        Requests<Region> requests = new Requests<>();
+        requests.get(requireContext(), Vass.DISTRICT + position).apply(district, new Requests.ItemClickListener() {
+            @Override
+            public void onClick(String position) {
+                getVillages(position);
+                district_id = position;
+            }
+
+            @Override
+            public void getText(String name) {
+                district.setText(name);
+            }
+        });
+    }
+
+    private void getVillages(String position) {
+        Requests<Region> requests = new Requests<>();
+        requests.get(requireContext(), Vass.VILLAGES + position).apply(villages, new Requests.ItemClickListener() {
+            @Override
+            public void onClick(String position) {
+                villages_id = position;
+            }
+
+            @Override
+            public void getText(String name) {
+                villages.setText(name);
+            }
+        });
+    }
+
+    private void validate() {
 
         button.setOnClickListener(v -> {
-            if (Objects.requireNonNull(editText.getText()).length() < 6 && !Objects.requireNonNull(repeat.getText()).toString().equals(editText.getText().toString())) {
-                p_editText.setError("Password tidak boleh kurang dari 6 huruf!");
-                p_repeat.setError("Password tidak sama!");
-            } else {
-                progressIndicator.setVisibility(View.VISIBLE);
-                getParentFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.next_register, new SignUp4())
-                        .addToBackStack(null)
-                        .commit();
+            progressIndicator.setVisibility(View.VISIBLE);
+            JSONObject object = new JSONObject();
+            try {
+                object.put("address", Objects.requireNonNull(address.getText()).toString());
+                object.put("pos_code", Objects.requireNonNull(pos_code.getText()).toString());
+                object.put("province", province_id);
+                object.put("regency", regencies_id);
+                object.put("district", district_id);
+                object.put("villages", villages_id);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        });*/
+
+            System.out.println(object.toString());
+
+            Map<String, String> params = new HashMap<>();
+            params.put("Content-Type", "application/json; charset=utf-8");
+            params.put("token", Preferences.getToken(requireContext()));
+            Requests<User> requests = new Requests<>();
+            requests.insert(requireContext(), Vass.CREATE_MERCHANT_INFO)
+                    .header(params, object)
+                    .commit();
+            requireFragment(new SignUp5(), R.id.next_register);
+        });
+
     }
 }
